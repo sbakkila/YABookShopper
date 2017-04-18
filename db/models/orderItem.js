@@ -9,6 +9,7 @@ module.exports = db => db.define('orderItem', {
   },
   quantity: {
     type: NUMBER,
+    defaultValue: 1,
     allowNull: false
   }
 }
