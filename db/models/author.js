@@ -1,7 +1,6 @@
 'use strict'
 
-const bcrypt = require('bcryptjs')
-    , {STRING, VIRTUAL, TEXT} = require('sequelize')
+const {STRING, TEXT} = require('sequelize')
 
 module.exports = db => db.define('author', {
   firstName: {

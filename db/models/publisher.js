@@ -1,7 +1,6 @@
 'use strict'
 
-const bcrypt = require('bcryptjs')
-    , {STRING, VIRTUAL} = require('sequelize')
+const {STRING} = require('sequelize')
 
 module.exports = db => db.define('publisher', {
   name: {
@@ -10,7 +9,4 @@ module.exports = db => db.define('publisher', {
       notEmpty: true
     }
   },
-}, {
-  classMethods: {
-  }
 })

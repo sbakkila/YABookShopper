@@ -1,7 +1,6 @@
 'use strict'
 
-const bcrypt = require('bcryptjs')
-    , {STRING, VIRTUAL, TEXT, FLOAT, INTEGER} = require('sequelize')
+const {STRING, TEXT, FLOAT, INTEGER} = require('sequelize')
 
 module.exports = db => db.define('books', {
   title: {
@@ -21,7 +20,7 @@ module.exports = db => db.define('books', {
   },
   // authorId and publisherId will be created with associations
   // inventory reflects # available when added to database; "decrement" instance method updates with purchase
-  // not sure if we should keep track of inventory here 
+  // not sure if we should keep track of inventory here
   inventory: {
     type: INTEGER,
     allowNull: false
@@ -38,8 +37,7 @@ module.exports = db => db.define('books', {
     decrementInventory: function() {
       if (this.inventory) { this.inventory-- }
       else { return "this book is not available" }
-    },
-    get
+    }
   },
   classMethods: {
     findByTitle: function(title) {
