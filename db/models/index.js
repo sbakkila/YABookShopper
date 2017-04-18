@@ -20,9 +20,9 @@ const app = require('APP')
       Author: require('./author'),
       Book: require('./book'),
       Genre: require('./genre'),
-      Publisher: require('./publisher')
+      Publisher: require('./publisher'),
       Order: require('./order'),
-      
+      OrderItem: require('./orderItem')
 
       // ---------- Add new models here ----------
     }
