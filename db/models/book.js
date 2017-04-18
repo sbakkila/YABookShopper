@@ -53,9 +53,9 @@ module.exports = db => db.define('books', {
 module.exports.associations = (Book, {Publisher, Review, Cart, Genre, Author}) => {
   Book.hasOne(Publisher)
   Book.hasMany(Review)
-  Book.belongsToMany(Cart, {through: BookCart})
-  Book.belongsToMany(Genre, {through: BookGenre})
-  Book.belongsToMany(Author, {through: AuthorBook})
+  Book.belongsToMany(Cart, {through: "BooksCarts"})
+  Book.belongsToMany(Genre, {through: "BooksGenres"})
+  Book.belongsToMany(Author, {through: "AuthorsBooks"})
 }
 
 // Discuss genre model and associations later

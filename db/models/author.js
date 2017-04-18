@@ -31,5 +31,5 @@ module.exports = db => db.define('author', {
 })
 
 module.exports.associations = (Author, {Book}) => {
-    Author.belongsToMany(Book, { through: AuthorBook })
+  Author.belongsToMany(Book, { through: "AuthorsBooks" })
 }
