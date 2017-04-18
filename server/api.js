@@ -10,3 +10,5 @@ api
 
 // No routes matched? 404.
 api.use((req, res) => res.status(404).end())
+
+api.use(require('./error.middleware'))

@@ -27,6 +27,10 @@ module.exports = db => db.define('books', {
   },
   photo: {
     type: STRING
+  },
+  isbn: {
+    type: STRING,
+    allowNull: false
   }
 }, {
   instanceMethods: {
@@ -44,6 +48,13 @@ module.exports = db => db.define('books', {
       return this.findOne({
         where: {
           title
+        }
+      })
+    },
+    findByISBN: function(isbn) {
+      return this.findOne({
+        where: {
+          isbn
         }
       })
     }
