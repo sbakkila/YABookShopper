@@ -21,11 +21,24 @@ module.exports = db => db.define('order', {
       deliverOrder: function() {
         this.status = 'delivered'
         this.dateReceived = new Date()
+      },
+      findTotalPrice: function() {
+        let totalPrice = 0
+        this.getOrderItems({
+          where: {
+            orderId: this.id
+          }
+        })
+        .then(orders => {
+          orders.forEach(order => { totalPrice += order.priceAtPurchase * order.quantity })
+        })
+        return totalPrice
       }
     }
   }
 )
 
-module.exports.associations = (order, {User}) => {
+module.exports.associations = (order, {User, orderItem}) => {
   order.belongsTo(User)
+  order.hasMany(orderItem)
 }
