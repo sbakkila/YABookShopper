@@ -10,8 +10,8 @@ module.exports = db => db.define('genre', {
 })
 
 module.exports.associations = (Genre, {Book}) => {
-    Genre.belongsToMany(Book, {through: BookGenre})
+  Genre.belongsToMany(Book, {through: "BooksGenres"})
 }
 
 // we want each genre to be unique. when 1 genre is selected, it can't be selected again
-//discuss validating 'unique' genres
+// discuss validating 'unique' genres
