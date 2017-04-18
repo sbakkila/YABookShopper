@@ -1,3 +1,10 @@
+ERD: https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1#G0B9kTwrprjBVgMnJyaWFZYUVNdHM
+
+
+
+
+
+
 file# Hi, I'm bones
 
 I'm a happy little skeleton. You can clone me to use as a starter on your projects!
