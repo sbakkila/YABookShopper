@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var Book = require('../models/book.js');
 
+// starting point from Express review checkpoint
+
 app.param('id', function(req, res, next, id) {
     Book.findById(Number(id))
         .then(book => {
