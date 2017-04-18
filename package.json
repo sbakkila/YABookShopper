@@ -1,7 +1,7 @@
 {
-  "name": "__BONES_NEEDS_A_NAME__",
+  "name": "ya_book_shopper",
   "version": "0.0.1",
-  "description": "A happy little skeleton.",
+  "description": "The best e-commerce to buy the best young-adult novels.",
   "main": "index.js",
   "engines": {
     "node": ">= 7.0.0"
@@ -20,6 +20,7 @@
     "start-watch": "nodemon server/start.js --watch server --watch db --watch index.js --watch package.json",
     "start-dev": "cross-env NODE_ENV=development npm run start-watch",
     "test": "mocha --compilers js:babel-register --watch-extensions js,jsx app/**/*.test.js app/**/*.test.jsx server/**/*.test.js db/**/*.test.js",
+    "test-db": "mocha --compilers js:babel-register --watch-extensions js db/**/*.test.js",
     "test-watch": "npm run test -- --watch --reporter=min",
     "seed": "node db/seed.js",
     "deploy-heroku": "bin/deploy-heroku.sh",
