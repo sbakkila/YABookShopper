@@ -21,6 +21,7 @@ module.exports = db => db.define('books', {
   },
   // authorId and publisherId will be created with associations
   // inventory reflects # available when added to database; "decrement" instance method updates with purchase
+  // not sure if we should keep track of inventory here 
   inventory: {
     type: INTEGER,
     allowNull: false
@@ -37,7 +38,8 @@ module.exports = db => db.define('books', {
     decrementInventory: function() {
       if (this.inventory) { this.inventory-- }
       else { return "this book is not available" }
-    }
+    },
+    get
   },
   classMethods: {
     findByTitle: function(title) {
@@ -52,9 +54,10 @@ module.exports = db => db.define('books', {
 
 module.exports.associations = (Book, {Publisher, Review, Cart, Genre, Author}) => {
   Book.hasOne(Publisher)
-  // all this is in progress
-
-
-  User.hasOne(OAuth)
-  User.belongsToMany(Thing, {as: 'favorites', through: Favorite})
+  Book.hasMany(Review)
+  Book.belongsToMany(Cart, {through: BookCart})
+  Book.belongsToMany(Genre, {through: BookGenre})
+  Book.belongsToMany(Author, {through: AuthorBook})
 }
+
+// Discuss genre model and associations later
