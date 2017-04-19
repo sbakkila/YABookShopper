@@ -23,7 +23,7 @@ module.exports = db => db.define('books', {
   // not sure if we should keep track of inventory here
   inventory: {
     type: INTEGER,
-    allowNull: false
+    defaultValue: 0
   },
   photo: {
     type: STRING
@@ -33,6 +33,14 @@ module.exports = db => db.define('books', {
     allowNull: false
   }
 }, {
+  hooks: {
+    afterCreate: function(book) {
+      book.inventory++
+    },
+    afterDestroy: function(book) {
+      if (book.inventory) { book.inventory-- } else { return 'this book is not available' }
+    }
+  },
   instanceMethods: {
     // findByAuthor: function(){},
     isAvailable: function() {
