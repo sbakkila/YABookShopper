@@ -1,21 +1,21 @@
 'use strict'
 
-const {NUMBER} = require('sequelize')
+const { INTEGER } = require('sequelize')
 
 module.exports = db => db.define('orderItem', {
   priceAtPurchase: {
-    type: NUMBER,
+    type: INTEGER,
     allowNull: false
   },
   quantity: {
-    type: NUMBER,
+    type: INTEGER,
     defaultValue: 1,
     allowNull: false
   }
 }
 )
 
-module.exports.associations = (orderItem, {Order, Book}) => {
-  orderItem.belongsTo(Order)
-  orderItem.belongsTo(Book)
+module.exports.associations = (OrderItem, {Order, Book}) => {
+  OrderItem.belongsTo(Order)
+  OrderItem.belongsTo(Book)
 }
