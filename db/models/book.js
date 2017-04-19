@@ -39,8 +39,7 @@ module.exports = db => db.define('books', {
       return this.inventory > 0
     },
     decrementInventory: function() {
-      if (this.inventory) { this.inventory-- }
-      else { return "this book is not available" }
+      if (this.inventory) { this.inventory-- } else { return 'this book is not available' }
     }
   },
   classMethods: {
@@ -61,12 +60,12 @@ module.exports = db => db.define('books', {
   }
 })
 
-module.exports.associations = (Book, {Publisher, Review, Cart, Genre, Author}) => {
+module.exports.associations = (Book, {Publisher, Review, OrderItem, Genre, Author}) => {
   Book.hasOne(Publisher)
+  Book.hasMany(OrderItem)
   Book.hasMany(Review)
-  Book.belongsToMany(Cart, {through: "BooksCarts"})
-  Book.belongsToMany(Genre, {through: "BooksGenres"})
-  Book.belongsToMany(Author, {through: "AuthorsBooks"})
+  Book.belongsToMany(Genre, {through: 'BooksGenres'})
+  Book.belongsToMany(Author, {through: 'AuthorsBooks'})
 }
 
 // Discuss genre model and associations later
