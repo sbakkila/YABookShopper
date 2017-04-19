@@ -16,7 +16,7 @@ app.get('/', function(req, res, next) {
     })
     .then(author => { author.getBooks() })
     .then(myBooks => {
-      if (myBooks) {
+      if (myBooks.length) {
         res.send(myBooks)
       } else {
         res.sendStatus(404)
