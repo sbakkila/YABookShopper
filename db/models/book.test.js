@@ -1,23 +1,31 @@
 'use strict'
 
 const db = require('APP/db')
-  , {Book} = db
-  , {expect} = require('chai')
+  , { Book } = db
+  , { expect } = require('chai')
 
 /* global describe it before afterEach */
 
+
 describe('Book', () => {
   before('Await database sync', () => db.didSync)
+  // before('Create example book', (done) => {
+  //   Book.create({
+  //     title: 'Lord of the Rings',
+  //     price: '30',
+  //     isbn: '95-8533-541-0'
+  //   })
+  //   done()
+  // })
   afterEach('Clear the tables', () => db.truncate({ cascade: true }))
 
-  describe('Availability', () => {
+  describe('Inventory', () => {
     it('resolves true if the inventory is stocked', () =>
       Book.create({ title: 'Harry Potter', isbn: '95-8532-541-1', price: '20' })
         .then(book => book.isAvailable())
         .then(result => expect(result).to.be.true))
 
     it('resolves with an empty array if the inventory is empty', () =>
-
       Book.findOrCreate({
         where: { isbn: '95-8532-541-1' },
         defaults: { title: 'Harry Potter', price: '20' }
@@ -30,24 +38,28 @@ describe('Book', () => {
           expect(book.inventory).to.equal(0)
         })
     )
-    // it('resolves with only one book left in the inventory if one item is deleted', () => {
-    //   let book1 = Book.create({title: 'Harry Potter', isbn: '95-8532-541-1', price: '20'})
-    //   let book2 = Book.update({
-    //     where: {
-    //       isbn: '95-8532-541-1'
-    //     }
-    //   })
+
+    it('can add inventory to already existing books', () => {
+      Book.create({
+        title: 'Harry Potter',
+        price: '20',
+        isbn: '95-8532-541-1'
+      })
+        .then(book => {
+          console.log(book.inventory++)
+          return book
+        })
+        .then(book => {
+          expect(book.inventory).to.equal(2)
+        })
+    })
+
+    // it('can find a book by title', () => {
+    //   Book.findByTitle('Lord of the Rings')
     //   .then(book => {
-    //     book.
+    //     console.log(book, 'book')
+    //     expect(book.title).to.be('Lord of the Rings')
     //   })
-    //   book1
-    //     .then(book => {
-    //       return book.destroy({force: true})
-    //     })
-    //     .then(listOfBooks => {
-    //       console.log(listOfBooks, 'this is the deleted book')
-    //       expect(listOfBooks).to.be.empty
-    //     })
     // })
   })
 })
