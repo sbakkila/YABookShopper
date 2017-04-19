@@ -4,7 +4,7 @@ var Book = require('../db/models/book.js')
 var Publisher = require('../db/models/publisher.js')
 var Review = require('../db/models/review.js')
 var BooksGenres = require('../db/models/book.js')
-var Author = require('../db.models.author.js')
+var Author = require('../db/models/author.js')
 
 app.get('/', function(req, res, next) {
   // query string will look like ?author=authorLastName
@@ -27,3 +27,5 @@ app.get('/', function(req, res, next) {
     res.sendStatus(404)
   }
 })
+
+module.exports = app
