@@ -23,8 +23,7 @@ const app = require('APP')
       Publisher: require('./publisher'),
       Order: require('./order'),
       OrderItem: require('./orderItem'),
-      Review: require('./review'),
-      Cart: require('./cart')
+      Review: require('./review')
 
       // ---------- Add new models here ----------
     }
