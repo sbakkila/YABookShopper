@@ -4,7 +4,7 @@ const {STRING, ENUM, DATE} = require('sequelize')
 
 module.exports = db => db.define('order', {
   status: {
-    type: ENUM('pending', 'shipping', 'delivered'),
+    type: ENUM('cart', 'pending', 'shipping', 'delivered'),
     defaultValue: 'pending'
   },
   dateOrdered: {

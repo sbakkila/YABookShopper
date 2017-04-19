@@ -1,10 +1,8 @@
 var express = require('express')
 var app = express()
-var Book = require('../db/models/book.js')
-var Publisher = require('../db/models/publisher.js')
-var Review = require('../db/models/review.js')
-var BooksGenres = require('../db/models/book.js')
-var Author = require('../db/models/author.js')
+
+const db = require('APP/db')
+const Author = db.model('author')
 
 app.get('/', function(req, res, next) {
   // query string will look like ?author=authorLastName

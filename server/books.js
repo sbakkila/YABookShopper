@@ -1,9 +1,10 @@
 var express = require('express')
 var app = express()
-var Book = require('../db/models/book.js')
-var Publisher = require('../db/models/publisher.js')
-var Review = require('../db/models/review.js')
-var BooksGenres = require('../db/models/book.js')
+
+const db = require('APP/db')
+const Book = db.model('books')
+const Review = db.model('review')
+const Publisher = db.model('publisher')
 
 app.param('id', function(req, res, next, id) {
   Book.findById(Number(id))
@@ -40,7 +41,7 @@ app.get('/', (req, res, next) => {
       })
       .catch(next)
   } else {
-    Book.findAll()
+    Book.findAll({})
     .then(books => res.send(books))
     .catch(next)
   }
