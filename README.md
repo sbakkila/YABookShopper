@@ -1,4 +1,7 @@
-ERD: https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1#G0B9kTwrprjBVgMnJyaWFZYUVNdHM
+ERD updated:
+https://docs.google.com/drawings/d/125q-q3Rs0EIjc5IHO6qXtt0Wi_THtlW2NGYeXxMbZwU/edit
+
+https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1#G0B9kTwrprjBVgMnJyaWFZYUVNdHM
 
 
 
