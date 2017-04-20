@@ -66,7 +66,7 @@ module.exports.associations = (Book, {Publisher, Review, OrderItem, Genre, Autho
   Book.hasOne(Publisher)
   Book.hasMany(OrderItem)
   Book.hasMany(Review)
-  Book.belongsToMany(Cart, {through: 'BooksCarts'})
+  // Book.belongsToMany(Cart, {through: 'BooksCarts'})
   Book.belongsToMany(Genre, {through: 'BooksGenres'})
   Book.belongsToMany(Author, {through: 'AuthorsBooks'})
 }
