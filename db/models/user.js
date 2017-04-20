@@ -5,6 +5,9 @@ const bcrypt = require('bcryptjs')
     , {STRING, VIRTUAL, BOOLEAN} = require('sequelize')
 
 module.exports = db => db.define('users', {
+  // todo JM/IJM - add other validations to properties
+  // e.g. address, 
+  // consider splitting address into multiple fields? e.g. state (enum)
   firstName: STRING,
   lastName: STRING,
   address: STRING,
@@ -16,6 +19,7 @@ module.exports = db => db.define('users', {
       notEmpty: true,
     }
   },
+  // JM/IJM perhaps default these properties to false? perhaps make notNull?
   isAdmin: BOOLEAN,
   isPublisher: BOOLEAN,
 
@@ -42,6 +46,7 @@ module.exports = db => db.define('users', {
 
 module.exports.associations = (User, {OAuth, Thing, Favorite, Review}) => {
   User.hasOne(OAuth)
+  // JM/IJM remove unused models
   User.belongsToMany(Thing, {as: 'favorites', through: Favorite})
   User.hasMany(Review)
 }

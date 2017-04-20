@@ -1,4 +1,6 @@
 var express = require('express')
+
+// IJM/JM - should be a router
 var app = express()
 
 const db = require('APP/db')
@@ -21,6 +23,7 @@ app.param('id', function(req, res, next, id) {
     .catch(next)
 })
 
+// OB - refactor this method: could squash the first if and last else
 app.get('/', (req, res, next) => {
   if (req.query.title) {
     Book.findAll({
@@ -99,6 +102,8 @@ app.delete('/:id', (req, res, next) => {
   .catch(next)
 })
 
+// IJM/JM - make these routes restful - the route reflects the nexted resources you are accessing and the data that is returned
+// searches can be done with query params. 
 app.get('/genre/:genreId', (req, res, next) => {
   Book.findAll({
     where: {
