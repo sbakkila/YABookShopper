@@ -6,7 +6,6 @@ const db = require('APP/db')
 
 /* global describe it before afterEach */
 
-
 describe('Book', () => {
   before('Await database sync', () => db.didSync)
   // before('Create example book', (done) => {
