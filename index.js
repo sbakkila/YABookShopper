@@ -28,7 +28,7 @@ if (!reasonableName.test(pkg.name)) {
 // This will load a secrets file from
 //
 //      ~/.your_app_name.env.js
-//   or ~/.your_app_name.env.jsoncd
+//   or ~/.your_app_name.env.json
 //
 // and add it to the environment.
 // Note that this needs to be in your home directory, not the project's root directory
