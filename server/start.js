@@ -40,6 +40,11 @@ module.exports = app
     keys: [process.env.SESSION_SECRET || 'an insecure secret key'],
   }))
 
+  .use((req, res, next) => {
+    req.session.id = "hello"
+    next()
+  })
+
   // Body parsing middleware
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
