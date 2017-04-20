@@ -43,7 +43,7 @@ describe('Book', () => {
         title: 'Harry Potter',
         price: '20',
         isbn: '95-8532-541-1',
-        inventory: this.inventory++
+        inventory: 1
       })
         .then(book => {
           console.log(book.inventory++)
