@@ -39,6 +39,8 @@ describe('Book', () => {
     )
 
     it('can add inventory to already existing books', () => {
+      // IJM/JM todo - make sure to return promises
+      // remember the red/green/refactor cycle
       Book.create({
         title: 'Harry Potter',
         price: '20',
