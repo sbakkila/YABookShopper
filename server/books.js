@@ -8,8 +8,8 @@ const Publisher = db.model('publisher')
 
 app.param('id', function(req, res, next, id) {
   // we want to add eager loading for reviews
-  Book.findById(Number(id)
-    .then(book => {
+  Book.findById(Number(id))
+  .then(book => {
       if (!book) {
         // can refactor to use HttpError later
         res.sendStatus(404)
@@ -18,7 +18,7 @@ app.param('id', function(req, res, next, id) {
         next()
       }
     })
-      .catch(next)
+    .catch(next)
 })
 
 app.get('/', (req, res, next) => {
@@ -57,7 +57,7 @@ app.post('/', (req, res, next) => {
     })
     .catch(next)
 })
-  
+
 // Return to this while writing Route Tests
 // get one book, and get all reviews for that book
 // app.get('/:id/reviews', (req, res, next) => {
@@ -65,7 +65,7 @@ app.post('/', (req, res, next) => {
 //     where: {
 //       bookId: req.book.id
 //     },
-  
+
 //   })
 //   .then((reviews) => { req.book.reviews = reviews })
 //   .then(
