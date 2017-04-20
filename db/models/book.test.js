@@ -6,7 +6,6 @@ const db = require('APP/db')
 
 /* global describe it before afterEach */
 
-
 describe('Book', () => {
   before('Await database sync', () => db.didSync)
   // before('Create example book', (done) => {
@@ -25,7 +24,7 @@ describe('Book', () => {
         .then(book => book.isAvailable())
         .then(result => expect(result).to.be.true))
 
-    it('resolves with an empty array if the inventory is empty', () =>
+    it('resolves with zero if the inventory is empty', () =>
       Book.findOrCreate({
         where: { isbn: '95-8532-541-1' },
         defaults: { title: 'Harry Potter', price: '20' }
