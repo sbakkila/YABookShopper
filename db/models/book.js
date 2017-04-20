@@ -23,7 +23,7 @@ module.exports = db => db.define('books', {
   // not sure if we should keep track of inventory here
   inventory: {
     type: INTEGER,
-    defaultValue: 0
+    allowNull: false
   },
   photo: {
     type: STRING
@@ -33,21 +33,15 @@ module.exports = db => db.define('books', {
     allowNull: false
   }
 }, {
-  hooks: {
-    afterCreate: function(book) {
-      book.inventory++
-    },
-    afterDestroy: function(book) {
-      if (book.inventory) { book.inventory-- } else { return 'this book is not available' }
-    }
-  },
   instanceMethods: {
     // findByAuthor: function(){},
     isAvailable: function() {
       return this.inventory > 0
     },
     decrementInventory: function() {
-      if (this.inventory) { this.inventory-- } else { return 'this book is not available' }
+      if (this.inventory) {
+        this.inventory--
+      } else { return 'this book is not available' }
     }
   },
   classMethods: {
@@ -72,6 +66,7 @@ module.exports.associations = (Book, {Publisher, Review, OrderItem, Genre, Autho
   Book.hasOne(Publisher)
   Book.hasMany(OrderItem)
   Book.hasMany(Review)
+  Book.belongsToMany(Cart, {through: 'BooksCarts'})
   Book.belongsToMany(Genre, {through: 'BooksGenres'})
   Book.belongsToMany(Author, {through: 'AuthorsBooks'})
 }

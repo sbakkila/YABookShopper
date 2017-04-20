@@ -1,12 +1,17 @@
 var express = require('express')
 var app = express()
-var Book = require('../db/models/book.js')
-var Publisher = require('../db/models/publisher.js')
+
+const db = require('APP/db')
+const Book = db.model('books')
+const Review = db.model('review')
+const Publisher = db.model('publisher')
 
 app.param('id', function(req, res, next, id) {
-  Book.findById(Number(id))
+  // we want to add eager loading for reviews
+  Book.findById(Number(id)
     .then(book => {
       if (!book) {
+        // can refactor to use HttpError later
         res.sendStatus(404)
       } else {
         req.book = book
@@ -37,7 +42,7 @@ app.get('/', (req, res, next) => {
       })
       .catch(next)
   } else {
-    Book.findAll()
+    Book.findAll({})
     .then(books => res.send(books))
     .catch(next)
   }
@@ -52,10 +57,22 @@ app.post('/', (req, res, next) => {
     })
     .catch(next)
 })
-
-app.get('/:id', (req, res, next) => {
-  res.send(req.book)
-})
+  
+// Return to this while writing Route Tests
+// get one book, and get all reviews for that book
+// app.get('/:id/reviews', (req, res, next) => {
+//   Review.findAll({
+//     where: {
+//       bookId: req.book.id
+//     },
+  
+//   })
+//   .then((reviews) => { req.book.reviews = reviews })
+//   .then(
+//     res.send(req.book)
+//   )
+//   .catch(next)
+// })
 
 app.put('/:id', (req, res, next) => {
   // ToDo: find user, check if they are an admin
@@ -70,7 +87,7 @@ app.put('/:id', (req, res, next) => {
 app.delete('/:id', (req, res, next) => {
   // ToDo: find user, check if they are an admin
 
-  // fix this tomorrow
+  // fix this later
   req.book.destroy()
   .then((num) => {
     if (num) {
@@ -79,6 +96,16 @@ app.delete('/:id', (req, res, next) => {
       res.sendStatus(404)
     }
   })
+  .catch(next)
+})
+
+app.get('/genre/:genreId', (req, res, next) => {
+  Book.findAll({
+    where: {
+      genreId: req.params.genreId
+    }
+  })
+  .then(books => { res.send(books) })
   .catch(next)
 })
 
