@@ -20,14 +20,14 @@ describe('Book', () => {
 
   describe('Inventory', () => {
     it('resolves true if the inventory is stocked', () =>
-      Book.create({ title: 'Harry Potter', isbn: '95-8532-541-1', price: '20' })
+      Book.create({ title: 'Harry Potter', isbn: '95-8532-541-1', price: '20', inventory: 1 })
         .then(book => book.isAvailable())
         .then(result => expect(result).to.be.true))
 
     it('resolves with zero if the inventory is empty', () =>
       Book.findOrCreate({
         where: { isbn: '95-8532-541-1' },
-        defaults: { title: 'Harry Potter', price: '20' }
+        defaults: { title: 'Harry Potter', price: '20', inventory: 1 }
       })
         .spread((book, created) => {
           book.decrementInventory()
@@ -42,7 +42,8 @@ describe('Book', () => {
       Book.create({
         title: 'Harry Potter',
         price: '20',
-        isbn: '95-8532-541-1'
+        isbn: '95-8532-541-1',
+        inventory: this.inventory++
       })
         .then(book => {
           console.log(book.inventory++)
