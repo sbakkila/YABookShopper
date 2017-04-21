@@ -22,9 +22,7 @@ Router.param('id', function(req, res, next, id) {
 })
 
 Router.get('/', (req, res, next) => {
-  Book.findAll({
-    where: req.query
-  })
+  Book.findAll()
   .then(books => res.send(books))
   .catch(next)
 })
