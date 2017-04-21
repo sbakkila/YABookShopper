@@ -46,7 +46,8 @@ describe('Book', () => {
         inventory: 1
       })
         .then(book => {
-          console.log(book.inventory++)
+          /* this test is broken. adding to existing books should not be
+             a .create operation, but a .update operation */
           return book
         })
         .then(book => {
