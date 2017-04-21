@@ -4,7 +4,7 @@ const request = require('supertest')
   , app = require('./start')
 const Book = db.model('books')
 
-/* global describe it before afterEach */
+/* global describe it before beforeEach afterEach */
 
 describe('/api/books', () => {
   before('Await database sync', () => db.didSync)
@@ -34,17 +34,24 @@ describe('/api/books', () => {
       })
   })
 
+  describe('GET', () =>
+      it('retrieves all books', () =>
+        request(app)
+          .get(`/api/books/`)
+          .expect(200)
+          .then(res => expect(res.body.length).to.equal(2)
+          )
+      )
+    )
+
   describe('GET /:id', () =>
-    describe('Book', () =>
       it('retrieve a book with an id', () =>
         request(app)
           .get(`/api/books/${firstBook.id}`)
           .expect(200)
-          .then(book => {
-            console.log(book)
-          })
+          .then(res => expect(res.body.id).to.equal(firstBook.id))
       )
-    ))
+    )
 
   describe('POST', () =>
     it('creates a book', () =>
@@ -54,19 +61,21 @@ describe('/api/books', () => {
             title: 'Harry Potter',
             priceInCents: 2000,
             inventory: 1,
-            isbn: 12345
+            isbn: 12349
           })
-          .expect(201)))
+          .expect(201)
+          .then(res => expect(res.body.isbn).to.equal("12349")
+          )))
 
-  it('redirects to the user it just made', () =>
-        request(app)
-          .post('/api/books')
-          .send({
-            email: 'eve@interloper.com',
-            password: '23456',
-          })
-          .redirects(1)
-          .then(res => expect(res.body).to.contain({
-            email: 'eve@interloper.com'
-          })))
+  // it('redirects to the user it just made', () =>
+  //       request(app)
+  //         .post('/api/books')
+  //         .send({
+  //           email: 'eve@interloper.com',
+  //           password: '23456',
+  //         })
+  //         .redirects(1)
+  //         .then(res => expect(res.body).to.contain({
+  //           email: 'eve@interloper.com'
+  //         })))
 })
