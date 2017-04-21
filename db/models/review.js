@@ -1,14 +1,17 @@
 'use strict'
 
-const {TEXT, ENUM} = require('sequelize')
+const {TEXT, INTEGER} = require('sequelize')
 
 module.exports = db => db.define('review', {
   text: {
     type: TEXT
   },
   rating: {
-    type: ENUM,
-    values: [1, 2, 3, 4, 5],
+    type: INTEGER,
+    validate: {
+      min: 1,
+      max: 5
+    },
     allowNull: false
   }
 })
