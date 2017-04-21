@@ -21,6 +21,11 @@ Router.param('id', function(req, res, next, id) {
     .catch(next)
 })
 
+Router.get('/:id', (req, res, next) => {
+  res.status(200).send(req.book)
+    .catch(next)
+})
+
 Router.get('/', (req, res, next) => {
   Book.findAll({
     where: req.query
