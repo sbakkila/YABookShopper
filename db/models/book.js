@@ -5,6 +5,7 @@ const {STRING, TEXT, FLOAT, INTEGER} = require('sequelize')
 module.exports = db => db.define('books', {
   title: {
     type: STRING,
+    allowNull: false,
     validate: {
       notEmpty: true
     }
@@ -12,8 +13,8 @@ module.exports = db => db.define('books', {
   description: {
     type: TEXT
   },
-  price: {
-    type: FLOAT,
+  priceInCents: {
+    type: INTEGER,
     validate: {
       notEmpty: true
     }
@@ -23,25 +24,44 @@ module.exports = db => db.define('books', {
   // not sure if we should keep track of inventory here
   inventory: {
     type: INTEGER,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      min: 0
+    }
   },
-  photo: {
-    type: STRING
+  photoUrl: {
+    type: STRING,
+    validate: {
+      isUrl: true
+    }
   },
   isbn: {
     type: STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   }
 }, {
   instanceMethods: {
-    // findByAuthor: function(){},
+    getAvgRating: function() {
+      return this.getReviews()
+      .then(reviews => {
+        let total = 0
+        reviews.forEach(review => {
+          total += review.rating
+        })
+        return total/reviews.length
+      })
+    },
     isAvailable: function() {
       return this.inventory > 0
     },
     decrementInventory: function() {
-      if (this.inventory) {
+      if (this.inventory > 0) {
         this.inventory--
-      } else { return 'this book is not available' }
+        return this.save()
+      } else {
+        return Promise.reject(new Error('No inventory to decrement!'))
+      }
     }
   },
   classMethods: {

@@ -9,6 +9,7 @@ api
   .use('/books', require('./books'))
   .use('/author', require('./author'))
   .use('/order', require('./order'))
+  .use('/genre', require('./genre'))
 
 // No routes matched? 404.
 api.use((req, res) => res.status(404).end())

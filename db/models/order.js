@@ -5,14 +5,10 @@ const {STRING, ENUM, DATE} = require('sequelize')
 module.exports = db => db.define('order', {
   status: {
     type: ENUM('cart', 'pending', 'shipping', 'delivered'),
-    defaultValue: 'pending'
+    defaultValue: 'cart'
   },
   dateOrdered: {
-    type: DATE,
-    validate: {
-      notNull: true,
-      isDate: true
-    }
+    type: DATE
   },
   dateReceived: DATE
 },
@@ -21,18 +17,19 @@ module.exports = db => db.define('order', {
       deliverOrder: function() {
         this.status = 'delivered'
         this.dateReceived = new Date()
+        return this.save()
       },
       findTotalPrice: function() {
         let totalPrice = 0
-        this.getOrderItems({
+        return this.getOrderItems({
           where: {
             orderId: this.id
           }
         })
-        .then(orders => {
-          orders.forEach(order => { totalPrice += order.priceAtPurchase * order.quantity })
+        .then(orderItems => {
+          orderItems.forEach(orderItem => { totalPrice += orderItem.priceAtPurchase * orderItem.quantity })
+          return totalPrice
         })
-        return totalPrice
       }
     }
   }
