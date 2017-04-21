@@ -38,7 +38,7 @@ describe('Book', () => {
         })
     )
 
-    it('can add inventory to already existing books', () => {
+    it('can add inventory to already existing books', () =>
       Book.create({
         title: 'Harry Potter',
         price: '20',
@@ -52,7 +52,7 @@ describe('Book', () => {
         .then(book => {
           expect(book.inventory).to.equal(2)
         })
-    })
+    )
 
     // it('can find a book by title', () => {
     //   Book.findByTitle('Lord of the Rings')
