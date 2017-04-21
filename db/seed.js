@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('APP/db')
-    , {Book, Thing, Author, Favorite, User, Promise} = db
+    , {Book, Thing, Author, Favorite, User, AuthorsBooks, Promise} = db
     , {mapValues} = require('lodash')
 
 function seedEverything() {
@@ -12,7 +12,13 @@ function seedEverything() {
     books: books()
   }
 
+  Book.findAll()
+  .then( books => {
+    books.for
+  })
+
   seeded.favorites = favorites(seeded)
+  seeded.bookAuthors = bookAuthors(seeded)
 
   return Promise.props(seeded)
 }
@@ -37,88 +43,110 @@ const things = seed(Thing, {
 })
 
 const books = seed(Book, {
-  'The Golden Compass': {
+  Harry_Potter: {
+    title: 'HP and the Philosophers Stone',
+    description: "Harry is sad but has and a magical stone",
+    priceInCents: 789,
+    inventory: 19,
+    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51MyEYnpSFL.jpg',
+    isbn: '0440918321',
+    publisherId: 1
+  },
+  The_Golden_Compass: {
     title: 'The Golden Compass',
     description: "In The Golden Compass, Philip Pullman has written a masterpiece that transcends genre. It is a children's book that will appeal to adults, a fantasy novel that will charm even the most hardened realist. Best of all, the author doesn't speak down to his audience, nor does he pull his punches; there is genuine terror in this book, and heartbreak, betrayal, and loss.",
-    price: '719',
+    priceInCents: 719,
     inventory: 12,
-    photo: 'https://images-na.ssl-images-amazon.com/images/I/51MyEYnpSFL.jpg',
-    isbn: '0440418321'
+    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51MyEYnpSFL.jpg',
+    isbn: '0440418321',
+    publisherId: 2
   },
-  'A Wrinkle in Time': {
+  A_Wrinkle_in_Time: {
     title: 'A Wrinkle in Time',
     description: 'One of the best fantasy novels of all time; winner of the Newbury Award. It is the first in Engles series of books about the Murry and OKeefe families.',
-    price: '1234',
+    priceInCents: 1234,
     inventory: 5,
-    photo: 'https://images-na.ssl-images-amazon.com/images/I/41pG-zMla3L.jpg',
-    isbn: '1250004675'
+    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/41pG-zMla3L.jpg',
+    isbn: '1250004675',
+    publisherId: 3
   },
-  'Twilight': {
+  Twilight: {
     title: 'Twilight',
     description: "Isabella Swan's move to Forks, a small, perpetually rainy town in Washington, could have been the most boring move she ever made. But once she meets the mysterious and alluring Edward Cullen, Isabella's life takes a thrilling and terrifying turn. Up until now, Edward has managed to keep his vampire identity a secret in the small community he lives in, but now nobody is safe, especially Isabella, the person Edward holds most dear.",
-    price: '1499',
+    priceInCents: 1499,
     inventory: 14,
-    photo: 'https://images-na.ssl-images-amazon.com/images/I/41K99%2BcInvL.jpg',
-    isbn: '0316015849'
+    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/41K99%2BcInvL.jpg',
+    isbn: '0316015849',
+    publisherId: 1
   },
-  'The Giver': {
+  The_Giver: {
     title: 'The Giver',
-    description: "The Giver is a 1993 American Young-adult fiction-Dystopian novel by Lois Lowry. It is set in a society which at first appears as a utopian society but then later revealed to be a dystopian one as the story progresses.",
-    price: '357',
+    description: 'The Giver is a 1993 American Young-adult fiction-Dystopian novel by Lois Lowry. It is set in a society which at first appears as a utopian society but then later revealed to be a dystopian one as the story progresses.',
+    priceInCents: 357,
     inventory: 4,
-    photo: 'https://images-na.ssl-images-amazon.com/images/I/51bLnbNy15L.jpg',
-    isbn: '0544336267'
+    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51bLnbNy15L.jpg',
+    isbn: '0544336267',
+    publisherId: 2
   },
-  'Lord of the Flies': {
+  Lord_of_the_Flies: {
     title: 'Lord of the Flies',
     description: 'At the dawn of the next world war, a plane crashes on an uncharted island, stranding a group of schoolboys. At first, with no adult supervision, their freedom is something to celebrate. This far from civilization they can do anything they want. Anything. But as order collapses, as strange howls echo in the night, as terror begins its reign, the hope of adventure seems as far removed from reality as the hope of being rescued.',
-    price: '1377',
+    priceInCents: 1377,
     inventory: 7,
-    photo: 'https://images-na.ssl-images-amazon.com/images/I/81UVwYPBtrL.jpg',
-    isbn: '0399501487'
+    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/81UVwYPBtrL.jpg',
+    isbn: '0399501487',
+    publisherId: 1
   },
-  'Animorphs': {
+  Animorphs: {
     title: 'Animorphs I: The Invasion',
     description: 'At the dawn of the next world war, a plane crashes on an uncharted island, stranding a group of schoolboys. At first, with no adult supervision, their freedom is something to celebrate. This far from civilization they can do anything they want. Anything. But as order collapses, as strange howls echo in the night, as terror begins its reign, the hope of adventure seems as far removed from reality as the hope of being rescued.',
-    price: '499',
-    inventory: 7,
-    photo: 'https://images-na.ssl-images-amazon.com/images/I/81UVwYPBtrL.jpg',
-    isbn: '0399501487'
+    priceInCents: 499,
+    inventory: 2,
+    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/81UVwYPBtrL.jpg',
+    isbn: '0399501420',
+    publisherId: 3
   }
 })
 
 const authors = seed(Author, {
-  'JK Rowling': {
+  KA_Applegate: {
+    firstName: 'KA',
+    lastName: 'Applegate',
+    bio: 'Her real name is Katherine'
+  },
+  JK_Rowling: {
     firstName: 'JK',
-    lastName: "Rowling",
+    lastName: 'Rowling',
     bio: 'She wrote things on a napkin'
   },
-  'Phillip Pullman': {
+  Phillip_Pullman: {
     firstName: 'Phillip',
     lastName: 'Pullman',
     bio: 'He wrote descriptions of naviagational devices made of precious metals'
   },
-  'Lowis Lowry': {
+  Lowis_Lowry: {
     firstName: 'Lowis',
     lastName: 'Lowry',
     bio: 'She wrote sad books'
   },
-  'William Golding': {
+  William_Golding: {
     firstName: 'William',
     lastName: 'Golding',
     bio: 'No piggy no!'
   },
-  'Stephanie Meyer': {
+  Stephanie_Meyer: {
     firstName: 'Stephanie',
     lastName: 'Meier',
     bio: 'Gave teens some unhealthy ideas about domestic violence'
   },
-  "Madeline L'Engle": {
+  Madeline_LEngle: {
     firstName: 'Madeline',
     lastName: `L'Engle`,
     bio: 'Something about witches'
   }
 })
+
+
 
 const favorites = seed(Favorite,
   // We're specifying a function here, rather than just a rows object.
@@ -149,6 +177,37 @@ const favorites = seed(Favorite,
     'god loves puppies': {
       user_id: users.god.id,
       thing_id: things.puppies.id
+    },
+  })
+)
+
+
+const bookAuthors = seed(AuthorsBooks,
+  ({authors, books}) => ({
+    'Rowling wrote HP': {
+      author_id: authors.JK_Rowling.id,
+      book_id: books.Harry_Potter.id
+    },
+    'lowry wrote the giver': {
+      author_id: authors.Lowis_Lowry.id,
+      book_id: books.The_Giver.id
+    },
+    'pullman wrote the golden compass': {
+      author_id: authors.Phillip_Pullman.id,
+      book_id: books.The_Golden_Compass.id
+    },
+
+    'golding wrote the Lord_of_the_Flies': {
+      author_id: authors.William_Golding.id,
+      book_id: books.Lord_of_the_Flies.id
+    },
+    'stephanie wrote twilight': {
+      author_id: authors.Stephanie_Meyer.id,
+      book_id: books.Twilight.id
+    },
+    'applegate wrote the animorphs': {
+      author_id: authors.KA_Applegate.id,
+      book_id: books.Animorphs.id
     },
   })
 )
