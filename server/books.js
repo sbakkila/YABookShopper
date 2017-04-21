@@ -26,10 +26,39 @@ Router.get('/:id', (req, res) => {
 })
 
 Router.get('/', (req, res, next) => {
-  Book.findAll()
-  .then(books => res.send(books))
-  .catch(next)
+  if (req.query) {
+    next()
+  }
+  else {
+    Book.findAll()
+    .then(books => res.send(books))
+    .catch(next)
+  }
 })
+
+Router.get('/', function(req, res, next) {
+  Book.
+})
+
+  // query string will look like ?author=authorLastName
+  // if (req.query.author) {
+  //   Author.findOne({
+  //     where: {
+  //       lastName: req.query.author
+  //     }
+  //   })
+  //   .then(author => { author.getBooks() })
+  //   .then(myBooks => {
+  //     if (myBooks.length) {
+  //       res.send(myBooks)
+  //     } else {
+  //       res.sendStatus(404)
+  //     }
+  //   })
+  //   .catch(next)
+  // } else {
+  //   res.sendStatus(404)
+  // }
 
 Router.post('/', (req, res, next) => {
   // ToDo: find user, check if they are an admin
