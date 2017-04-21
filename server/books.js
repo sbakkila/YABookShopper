@@ -26,9 +26,7 @@ Router.get('/:id', (req, res) => {
 })
 
 Router.get('/', (req, res, next) => {
-  Book.findAll({
-    where: req.query
-  })
+  Book.findAll()
   .then(books => res.send(books))
   .catch(next)
 })
