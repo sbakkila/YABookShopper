@@ -50,7 +50,7 @@ const books = seed(Book, {
     inventory: 19,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51MyEYnpSFL.jpg',
     isbn: '0440918321',
-    publisherId: 1
+
   },
   The_Golden_Compass: {
     title: 'The Golden Compass',
@@ -59,7 +59,7 @@ const books = seed(Book, {
     inventory: 12,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51MyEYnpSFL.jpg',
     isbn: '0440418321',
-    publisherId: 2
+
   },
   A_Wrinkle_in_Time: {
     title: 'A Wrinkle in Time',
@@ -68,7 +68,7 @@ const books = seed(Book, {
     inventory: 5,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/41pG-zMla3L.jpg',
     isbn: '1250004675',
-    publisherId: 3
+
   },
   Twilight: {
     title: 'Twilight',
@@ -77,7 +77,7 @@ const books = seed(Book, {
     inventory: 14,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/41K99%2BcInvL.jpg',
     isbn: '0316015849',
-    publisherId: 1
+
   },
   The_Giver: {
     title: 'The Giver',
@@ -86,7 +86,7 @@ const books = seed(Book, {
     inventory: 4,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51bLnbNy15L.jpg',
     isbn: '0544336267',
-    publisherId: 2
+
   },
   Lord_of_the_Flies: {
     title: 'Lord of the Flies',
@@ -95,7 +95,7 @@ const books = seed(Book, {
     inventory: 7,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/81UVwYPBtrL.jpg',
     isbn: '0399501487',
-    publisherId: 1
+
   },
   Animorphs: {
     title: 'Animorphs I: The Invasion',
@@ -104,7 +104,7 @@ const books = seed(Book, {
     inventory: 2,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/81UVwYPBtrL.jpg',
     isbn: '0399501420',
-    publisherId: 3
+
   }
 })
 
