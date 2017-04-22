@@ -41,7 +41,7 @@ module.exports = app
   }))
 
   .use((req, res, next) => {
-    req.session.id = "hello"
+    req.session.id = 'hello'
     next()
   })
 
@@ -52,10 +52,8 @@ module.exports = app
   // Authentication middleware
   .use(passport.initialize())
   .use(passport.session())
-
-  // Serve static files from ../public
-  .use(express.static(resolve(__dirname, '..', 'public')))
-
+  .use(require('./statics.middleware'))
+  .use(express.static(resolve(__dirname, '..', 'public'))) // Serve static files from ../public
   // Serve our api - ./api also requires in ../db, which syncs with our database
   .use('/api', require('./api'))
 

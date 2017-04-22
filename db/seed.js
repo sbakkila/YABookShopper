@@ -2,6 +2,7 @@
 
 const db = require('APP/db')
     , {Book, Thing, Author, Favorite, User, AuthorsBooks, Promise} = db
+    , {Genre, BooksGenres, Review, Order, OrderItem} = db
     , {mapValues} = require('lodash')
 
 function seedEverything() {
@@ -9,16 +10,21 @@ function seedEverything() {
     users: users(),
     things: things(),
     authors: authors(),
-    books: books()
+    books: books(),
+    genres: genres()
   }
 
-  Book.findAll()
-  .then( books => {
-    books.for
-  })
-
+  // What were we thinking here??
+    // Book.findAll()
+    // .then( books => {
+    //   books.for
+    // })
   seeded.favorites = favorites(seeded)
   seeded.bookAuthors = bookAuthors(seeded)
+  seeded.booksGenres = booksGenres(seeded)
+  seeded.reviews = reviews(seeded)
+  seeded.orders = orders(seeded)
+  seeded.orderItem = orderItem(seeded)
 
   return Promise.props(seeded)
 }
@@ -48,7 +54,7 @@ const books = seed(Book, {
     description: "Harry is sad but has and a magical stone",
     priceInCents: 789,
     inventory: 19,
-    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51MyEYnpSFL.jpg',
+    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51kQGQirOFL.jpg',
     isbn: '0440918321',
 
   },
@@ -102,9 +108,39 @@ const books = seed(Book, {
     description: 'At the dawn of the next world war, a plane crashes on an uncharted island, stranding a group of schoolboys. At first, with no adult supervision, their freedom is something to celebrate. This far from civilization they can do anything they want. Anything. But as order collapses, as strange howls echo in the night, as terror begins its reign, the hope of adventure seems as far removed from reality as the hope of being rescued.',
     priceInCents: 499,
     inventory: 2,
-    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/81UVwYPBtrL.jpg',
+    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51uRsr7d71L.jpg',
     isbn: '0399501420',
 
+  }
+})
+
+const genres = seed(Genre, {
+  fantasy: {
+    genreType: 'fantasy'
+  },
+  mystery: {
+    genreType: 'mystery'
+  },
+  historical: {
+    genreType: 'historical'
+  },
+  scifi: {
+    genreType: 'sci-fi'
+  },
+  romance: {
+    genreType: 'romance'
+  },
+  horror: {
+    genreType: 'horror'
+  },
+  action: {
+    genreType: 'action'
+  },
+  death: {
+    genreType: 'death'
+  },
+  thriller: {
+    genreType: 'thriller'
   }
 })
 
@@ -181,6 +217,84 @@ const favorites = seed(Favorite,
   })
 )
 
+const booksGenres = seed(BooksGenres,
+  ({books, genres}) => ({
+    'harry potter so fantasy': {
+      book_id: books.Harry_Potter.id,
+      genre_id: genres.fantasy.id
+    },
+    'harry potter so action': {
+      book_id: books.Harry_Potter.id,
+      genre_id: genres.action.id
+    },
+    'giver so scifi': {
+      book_id: books.The_Giver.id,
+      genre_id: genres.scifi.id
+    },
+    'golden compass so fantasy': {
+      book_id: books.The_Golden_Compass.id,
+      genre_id: genres.fantasy.id
+    },
+    'golden compass so action': {
+      book_id: books.The_Golden_Compass.id,
+      genre_id: genres.action.id
+    },
+    'flies so action': {
+      book_id: books.Lord_of_the_Flies.id,
+      genre_id: genres.action.id
+    },
+    'flies so historical': {
+      book_id: books.Lord_of_the_Flies.id,
+      genre_id: genres.historical.id
+    },
+    'flies so thriller': {
+      book_id: books.Lord_of_the_Flies.id,
+      genre_id: genres.thriller.id
+    }
+  })
+)
+
+const orders = seed(Order,
+  ({users}) => ({
+    obama: {
+      status: 'cart',
+      user_id: users.barack.id
+    },
+    god: {
+      status: 'pending',
+      user_id: users.god.id
+    }
+  })
+)
+
+const orderItem = seed(OrderItem,
+  ({orders, books}) => ({
+    obama_giver: {
+      priceAtPurchase: 750,
+      quantity: 2,
+      book_id: books.The_Giver.id,
+      order_id: orders.obama.id
+    },
+    obama_potter: {
+      priceAtPurchase: 500,
+      quantity: 1,
+      book_id: books.Harry_Potter.id,
+      order_id: orders.obama.id
+    },
+    god_animorphs: {
+      priceAtPurchase: 600,
+      quantity: 7,
+      book_id: books.Animorphs.id,
+      order_id: orders.god.id
+    },
+    god_compass: {
+      priceAtPurchase: 899,
+      quantity: 2,
+      book_id: books.The_Golden_Compass.id,
+      order_id: orders.god.id
+    }
+  })
+)
 
 const bookAuthors = seed(AuthorsBooks,
   ({authors, books}) => ({
@@ -196,7 +310,6 @@ const bookAuthors = seed(AuthorsBooks,
       author_id: authors.Phillip_Pullman.id,
       book_id: books.The_Golden_Compass.id
     },
-
     'golding wrote the Lord_of_the_Flies': {
       author_id: authors.William_Golding.id,
       book_id: books.Lord_of_the_Flies.id
@@ -209,6 +322,35 @@ const bookAuthors = seed(AuthorsBooks,
       author_id: authors.KA_Applegate.id,
       book_id: books.Animorphs.id
     },
+  })
+)
+
+const reviews = seed(Review,
+  ({users, books}) => ({
+    god_twilight: {
+      text: "We did not like this book. We mean, this is more or less why we decided not to make vampires. Everyone gets all soul-searchy and BDSM-y.",
+      rating: 1,
+      user_id: users.god.id,
+      book_id: books.Twilight.id
+    },
+    god_giver: {
+      text: "Nice work Lois. Seriously, home run. That poor kid. Also we found the giver to be SUPER relatable.",
+      rating: 5,
+      user_id: users.god.id,
+      book_id: books.The_Giver.id
+    },
+    barack_giver: {
+      text: "I think anytime one reads about dystopian societies, we immediately contemplate what's broken in our own communities. Or what's about to break. Or what's about to be purposefully dismantled by a malicious successor.",
+      rating: 4,
+      user_id: users.barack.id,
+      book_id: books.The_Giver.id
+    },
+    barack_animorphs: {
+      text: "Many people are surprised to learn that this is my favorite book, and not the reason you're undoubtedly thinking.",
+      rating: 4,
+      user_id: users.barack.id,
+      book_id: books.Animorphs.id
+    }
   })
 )
 
@@ -280,4 +422,4 @@ function seed(Model, rows) {
   }
 }
 
-module.exports = Object.assign(seed, {users, books, authors, things, favorites})
+module.exports = Object.assign(seed, {users, books, authors, things, favorites, genres})
