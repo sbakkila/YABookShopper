@@ -30,6 +30,6 @@ module.exports = db => db.define('author', {
   }
 })
 // Edited for seeding purposes, join table created manually
-// module.exports.associations = (Author, {Book}) => {
-  // Author.belongsToMany(Book, { through: 'AuthorsBooks' })
-// }
+module.exports.associations = (Author, {Book}) => {
+  Author.belongsToMany(Book, { through: 'AuthorsBooks' })
+}

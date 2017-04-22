@@ -3,6 +3,7 @@ var Router = express.Router()
 
 const db = require('APP/db')
 const Book = db.model('books')
+const Author = db.model('author')
 const Review = db.model('review')
 const Publisher = db.model('publisher')
 
@@ -26,7 +27,7 @@ Router.get('/:id', (req, res) => {
 })
 
 Router.get('/', (req, res, next) => {
-  Book.findAll()
+  Book.findAll({ include: [ Author ] })
   .then(books => res.send(books))
   .catch(next)
 })

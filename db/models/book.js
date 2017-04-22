@@ -88,7 +88,7 @@ module.exports.associations = (Book, {Publisher, Review, OrderItem, Genre, Autho
   Book.hasMany(Review)
   Book.belongsToMany(Genre, {through: 'BooksGenres'})
   // Edited for seeding purposes, join table created manually
-  // Book.belongsToMany(Author, {through: 'AuthorsBooks'})
+  Book.belongsToMany(Author, {through: 'AuthorsBooks'})
 }
 
 // Discuss genre model and associations later
