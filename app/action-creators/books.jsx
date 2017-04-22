@@ -13,11 +13,11 @@ export const loadBooks = function() {
   return function(dispatch) {
     axios.get('/api/books')
     .then(function(res) {
-      console.log('res: ', res)
+      // console.log('res: ', res)
       return res.data
     })
     .then(function(books) {
-      console.log('books ', books)
+      // console.log('books ', books)
       const action = receiveBooks(books)
       dispatch(action)
     })
