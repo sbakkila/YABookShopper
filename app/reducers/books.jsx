@@ -1,15 +1,20 @@
+import { RECEIVE_BOOKS } from '../constants'
 
-export const RECEIVE_BOOKS = 'RECEIVE_BOOKS'
+const initialBooksState = {
+  list: []
+}
 
-
-const reducer = (state=null, action) => {
+const reducer = (state=initialBooksState, action) => {
   const newState = Object.assign({}, state)
 
   switch (action.type) {
   case RECEIVE_BOOKS:
-    return newState.allBooks = action.allBooks
-  default: return state
+    newState.list = action.allBooks
+    return newState
+
+  default:
+    return state
   }
 }
 
-export default reducer;
+export default reducer

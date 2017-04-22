@@ -1,21 +1,13 @@
-import React, { Component } from 'react' 
-import axios from 'axios'
+import React, { Component } from 'react'
 
-export default class Books extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  // componentDidMount(){
-  //   this.props.loadBooks()
-  // }
-
-  render() {
-    console.log(this.props, 'props')
-    return (
-      <div>
-        <h1>hi</h1>
-      </div>
-    )
-  }
+const Books = (props) => {
+  console.log(props)
+  return(
+    <div>
+        <h1>All books: </h1>
+        <h1>{props.list}</h1>
+    </div>
+  )
 }
+
+export default Books

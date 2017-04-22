@@ -1,19 +1,20 @@
+import { RECEIVE_BOOKS } from '../constants'
 import axios from 'axios'
+// maybe import browserHistory when we delete?
 
-export const RECEIVE_BOOKS = 'RECEIVE_BOOKS'
+// Regular action
+export const receiveBooks = (allBooks) => ({
+  type: RECEIVE_BOOKS,
+  allBooks
+})
 
-export const receiveBooks = (listOfBooks) => {
-  return {
-    type: RECEIVE_BOOKS,
-    allBooks: listOfBooks
-  }
-}
-
+// THUNK
 export const loadBooks = function() {
   return function(dispatch) {
     axios.get('/api/books')
     .then(function(res) {
-      return res.data
+      // try res.json()
+      return res.json()
     })
     .then(function(books) {
       const action = receiveBooks(books)
