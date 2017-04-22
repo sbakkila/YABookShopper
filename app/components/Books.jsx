@@ -5,12 +5,9 @@ const Books = (props) => {
   return (
     <div>
         <h1>All books: </h1>
-        {props.allBooks.map(book => {
-          <ol>
-          <li>{book.title}</li>
-          <li>{book.price}</li>
-          </ol>
-        })}
+        <ol>
+          {props.allBooks.map(book => <li key={book.id}>{book.title}</li>)}
+        </ol>
         <h1>{props.allBooks}</h1>
     </div>
   )
