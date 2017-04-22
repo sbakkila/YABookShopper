@@ -7,7 +7,7 @@ api
   .use('/auth', require('./auth'))
   .use('/users', require('./users'))
   .use('/books', require('./books'))
-  .use('/author', require('./author'))
+  .use('/authors', require('./authors'))
   .use('/order', require('./order'))
   .use('/genre', require('./genre'))
 
