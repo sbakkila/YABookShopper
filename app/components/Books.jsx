@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 
 const Books = (props) => {
-
-
-  
   return (
     <div>
         <h1>All books: </h1>
@@ -42,8 +39,6 @@ const Books = (props) => {
         </ol>
 
     </div>
-
-
 
 
   )
