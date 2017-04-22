@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react' 
 import axios from 'axios'
 
 export default class Books extends Component {
@@ -6,11 +6,12 @@ export default class Books extends Component {
     super(props)
   }
 
-  componentDidMount(){
-    this.props.loadAllBooks()
-  }
+  // componentDidMount(){
+  //   this.props.loadBooks()
+  // }
 
   render() {
+    console.log(this.props, 'props')
     return (
       <div>
         <h1>hi</h1>

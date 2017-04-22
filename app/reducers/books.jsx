@@ -1,6 +1,7 @@
 
 export const RECEIVE_BOOKS = 'RECEIVE_BOOKS'
 
+
 const reducer = (state=null, action) => {
   const newState = Object.assign({}, state)
 
@@ -10,3 +11,5 @@ const reducer = (state=null, action) => {
   default: return state
   }
 }
+
+export default reducer;
