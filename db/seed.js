@@ -1,8 +1,7 @@
 'use strict'
 
 const db = require('APP/db')
-    , {Book, Thing, Author, Favorite, User, AuthorsBooks, Promise} = db
-    , {Genre, BooksGenres, Review, Order, OrderItem} = db
+    , {Book, Thing, Author, Favorite, User, AuthorsBooks, Publisher, Genre, BooksGenres, Review, Order, OrderItem, Promise} = db
     , {mapValues} = require('lodash')
 
 function seedEverything() {
@@ -11,14 +10,10 @@ function seedEverything() {
     things: things(),
     authors: authors(),
     books: books(),
-    genres: genres()
+    genres: genres(),
+    publishers: publishers(),
   }
 
-  // What were we thinking here??
-    // Book.findAll()
-    // .then( books => {
-    //   books.for
-    // })
   seeded.favorites = favorites(seeded)
   seeded.bookAuthors = bookAuthors(seeded)
   seeded.booksGenres = booksGenres(seeded)
@@ -114,6 +109,18 @@ const books = seed(Book, {
   }
 })
 
+const publishers = seed(Publisher, {
+  Scholastic: {
+    name: 'Scholastic'
+  },
+  MacMillian: {
+    name: 'MacMillian'
+  },
+  Penguin: {
+    name: 'Penguin'
+  },
+})
+
 const genres = seed(Genre, {
   fantasy: {
     genreType: 'fantasy'
@@ -181,8 +188,6 @@ const authors = seed(Author, {
     bio: 'Something about witches'
   }
 })
-
-
 
 const favorites = seed(Favorite,
   // We're specifying a function here, rather than just a rows object.

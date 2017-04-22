@@ -6,10 +6,12 @@ const Book = db.model('books')
 const Author = db.model('author')
 const Review = db.model('review')
 const Publisher = db.model('publisher')
+const Genre = db.model('genre')
 
 Router.param('id', function(req, res, next, id) {
   // we want to add eager loading for reviews
-  Book.findById(Number(id))
+  Book.findById(Number(id),
+  { include: [{model: Genre}, {model: Publisher}, {model: Author}] })
   .then(book => {
     if (!book) {
       // can refactor to use HttpError later
