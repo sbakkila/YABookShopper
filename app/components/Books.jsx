@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 
 const Books = (props) => {
-  console.log('******* here are the books', props.allBooks)
+  // console.log(props.allBooks[0].authors[0].firstName)
+  // props.allBooks[0] ? console.log(props.allBooks[0].authors[0].firstName) : console.log('the world is broken')
+  // function isAuthor() {
+  //     props.allBooks[0] ? console.log(props.allBooks[idx].authors[0].firstName) : console.log('the world is broken')
+  // }
   return (
 
     <div className="container">
@@ -14,10 +18,10 @@ const Books = (props) => {
         <div className="item active">
           <div className="row">
             {
-              props.allBooks && props.allBooks.map(book => {
+              props.allBooks && props.allBooks.map( (book, idx) => {
                 return (
                   <div key={book.id} className="col-sm-3">
-                    <div className="col-item">
+                    <div className="col-item" >
                       <div className="photo">
                         <img src={book.photoUrl} className="img-responsive" alt="a" />
                       </div>
@@ -25,7 +29,9 @@ const Books = (props) => {
                         <div className="row">
                           <div className="price col-md-6">
                             <h5>{book.title}</h5>
-                            <h5 className="price-text-color">{book.price}</h5>
+                            <h5 className="price-text-color">{book.priceInCents}</h5>
+                            <h5 className="price-text-color">{book.authors[0] ? props.allBooks[idx].authors[0].firstName : 'no author listed'}</h5>
+
                           </div>
                           <div className="rating hidden-sm col-md-6">
                             <i className="price-text-color fa fa-star"></i><i className="price-text-color fa fa-star">
