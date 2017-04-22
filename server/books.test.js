@@ -10,8 +10,8 @@ describe('/api/books', () => {
   before('Await database sync', () => db.didSync)
   afterEach('Clear the tables', () => db.truncate({ cascade: true }))
 
-  let firstBook;
-  let secondBook;
+  let firstBook
+  let secondBook
   beforeEach('Seed users', () => {
     const books = [
       {
@@ -21,7 +21,7 @@ describe('/api/books', () => {
         isbn: 12345
       },
       {
-        title: 'Cooking by Christopher',
+        title: 'Cooking',
         priceInCents: 10000,
         inventory: 10,
         isbn: 12346
@@ -53,6 +53,15 @@ describe('/api/books', () => {
       )
     )
 
+  describe('GET /', () =>
+      it('retrieve a book by query string', () =>
+        request(app)
+          .get(`/api/books?title=Cooking`)
+          .expect(200)
+          .then((res) => expect(res.body[0].title).to.equal('Cooking'))
+      )
+    )
+
   describe('POST', () =>
     it('creates a book', () =>
         request(app)
@@ -64,18 +73,17 @@ describe('/api/books', () => {
             isbn: 12349
           })
           .expect(201)
-          .then(res => expect(res.body.isbn).to.equal("12349")
+          .then(res => expect(res.body.isbn).to.equal('12349')
           )))
 
-  // it('redirects to the user it just made', () =>
-  //       request(app)
-  //         .post('/api/books')
-  //         .send({
-  //           email: 'eve@interloper.com',
-  //           password: '23456',
-  //         })
-  //         .redirects(1)
-  //         .then(res => expect(res.body).to.contain({
-  //           email: 'eve@interloper.com'
-  //         })))
+  describe('PUT', () =>
+    it('can change the inventory of a book', () =>
+        request(app)
+          .put(`/api/books/${firstBook.id}`)
+          .send({
+            inventory: 5,
+          })
+          .expect(201)
+          .then(res => expect(res.body.inventory).to.equal(5)
+          )))
 })
