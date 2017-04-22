@@ -7,9 +7,6 @@ function mapStateToProps(state) {
   }
 }
 
-// function mapDispatchToProps(dispatch) {
-// }
-
 const AllBooksContainer = connect(
   mapStateToProps
 )(Books)

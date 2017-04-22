@@ -1,6 +1,6 @@
 import { RECEIVE_BOOKS } from '../constants'
 import axios from 'axios'
-// maybe import browserHistory when we delete?
+// maybe import browserHistory when we add a delete action?
 
 // Regular action
 export const receiveBooks = (allBooks) => ({
@@ -13,10 +13,11 @@ export const loadBooks = function() {
   return function(dispatch) {
     axios.get('/api/books')
     .then(function(res) {
-      // try res.json()
-      return res.json()
+      console.log('res: ', res)
+      return res.data
     })
     .then(function(books) {
+      console.log('books ', books)
       const action = receiveBooks(books)
       dispatch(action)
     })

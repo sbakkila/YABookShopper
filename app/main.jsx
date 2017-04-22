@@ -11,6 +11,12 @@ import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Books from './components/Books'
 
+import {loadBooks} from './action-creators/books'
+
+const onBooksEnter = function (nextRouterState) {
+  store.dispatch(loadBooks())
+};
+
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
 )(
@@ -28,7 +34,7 @@ render(
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
         <IndexRedirect to="/books" />
-        <Route path="/books" component={Books} />
+        <Route path="/books" component={Books} onEnter={onBooksEnter} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
