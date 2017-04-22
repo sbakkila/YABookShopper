@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 
 const Books = (props) => {
-  // console.log(props.allBooks[0].authors[0].firstName)
-  // props.allBooks[0] ? console.log(props.allBooks[0].authors[0].firstName) : console.log('the world is broken')
-  // function isAuthor() {
-  //     props.allBooks[0] ? console.log(props.allBooks[idx].authors[0].firstName) : console.log('the world is broken')
-  // }
+
   return (
 
     <div className="container">
