@@ -18,6 +18,7 @@ const app = require('APP')
       Thing: require('./thing'),
       Favorite: require('./favorite'),
       AuthorsBooks: require('./authorsbooks'),
+      BooksGenres: require('./booksgenres'),
       Author: require('./author'),
       Book: require('./book'),
       Genre: require('./genre'),
