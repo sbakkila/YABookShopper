@@ -5,7 +5,13 @@ const Books = (props) => {
   return (
     <div>
         <h1>All books: </h1>
-        <h1>{props.list}</h1>
+        {props.allBooks.map(book => {
+          <ol>
+          <li>{book.title}</li>
+          <li>{book.price}</li>
+          </ol>
+        })}
+        <h1>{props.allBooks}</h1>
     </div>
   )
 }

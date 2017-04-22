@@ -3,7 +3,7 @@ import Books from '../components/Books'
 
 function mapStateToProps(state) {
   return {
-    allBooks: state.books.allBooks
+    allBooks: state.books.list
   }
 }
 
