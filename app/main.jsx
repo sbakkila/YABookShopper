@@ -9,6 +9,15 @@ import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
+import Books from './components/Books'
+
+import AllBooksContainer from './containers/AllBooksContainer'
+
+import {loadBooks} from './action-creators/books'
+
+const onBooksEnter = function(nextRouterState) {
+  store.dispatch(loadBooks())
+}
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -26,8 +35,8 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
-        <IndexRedirect to="/jokes" />
-        <Route path="/jokes" component={Jokes} />
+        <IndexRedirect to="/books" />
+        <Route path="/books" component={AllBooksContainer} onEnter={onBooksEnter} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
