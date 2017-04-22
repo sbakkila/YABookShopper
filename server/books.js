@@ -3,6 +3,7 @@ var Router = express.Router()
 
 const db = require('APP/db')
 const Book = db.model('books')
+const Author = db.model('author')
 const Review = db.model('review')
 const Publisher = db.model('publisher')
 
@@ -32,7 +33,7 @@ Router.get('/', (req, res, next) => {
     next()
   }
   else {
-    Book.findAll()
+    Book.findAll({ include: [Author] })
     .then(books => res.send(books))
     .catch(next)
   }
@@ -41,7 +42,8 @@ Router.get('/', (req, res, next) => {
 // look up book by query string. remember to properly factor query strings
 Router.get('/', function(req, res, next) {
   Book.findAll({
-    where: req.query
+    where: req.query,
+    include: [Author]
   })
   .then(function(books) {
     if (!books) {
