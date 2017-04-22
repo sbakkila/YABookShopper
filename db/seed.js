@@ -12,10 +12,11 @@ function seedEverything() {
     books: books()
   }
 
-  Book.findAll()
-  .then( books => {
-    books.for
-  })
+  // What were we thinking here??
+    // Book.findAll()
+    // .then( books => {
+    //   books.for
+    // })
 
   seeded.favorites = favorites(seeded)
   seeded.bookAuthors = bookAuthors(seeded)
