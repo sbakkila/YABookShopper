@@ -1,8 +1,8 @@
 'use strict'
 
 const db = require('APP/db')
-    , {Book, Thing, Author, Favorite, User, AuthorsBooks, Publisher, Genre, BooksGenres, Review, Order, OrderItem, Promise} = db
-    , {mapValues} = require('lodash')
+  , {Book, Thing, Author, Favorite, User, AuthorsBooks, Publisher, Genre, BooksGenres, Review, Order, OrderItem, Promise} = db
+  , {mapValues} = require('lodash')
 
 function seedEverything() {
   const seeded = {
@@ -413,9 +413,9 @@ function seed(Model, rows) {
                 )
             }
           }).reduce(
-            (all, one) => Object.assign({}, all, {[one.key]: one.value}),
-            {}
-          )
+          (all, one) => Object.assign({}, all, {[one.key]: one.value}),
+          {}
+        )
         )
       )
       .then(seeded => {

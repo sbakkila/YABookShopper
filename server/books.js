@@ -1,5 +1,6 @@
 var express = require('express')
 var Router = express.Router()
+var HttpError = require('./utils/HttpError')
 
 const db = require('APP/db')
 const Book = db.model('books')
@@ -17,7 +18,7 @@ Router.param('id', function(req, res, next, id) {
   .then(book => {
     if (!book) {
       // can refactor to use HttpError later
-      res.sendStatus(404)
+      throw HttpError(404)
     } else {
       req.book = book
       next()
@@ -47,11 +48,15 @@ Router.get('/', (req, res, next) => {
 Router.get('/', function(req, res, next) {
   Book.findAll({
     where: req.query,
-    include: [Author]
+    include: [
+      {model: Author},
+      {model: Review}
+    ]
+    // include: [Author]
   })
   .then(function(books) {
     if (!books) {
-      res.status(404).end()
+      throw HttpError(404)
     } else {
       res.status(200).send(books)
     }
@@ -73,12 +78,12 @@ Router.post('/', (req, res, next) => {
 Router.get('/:id/reviews', (req, res, next) => {
   Review.findAll({
     where: {
-      bookId: req.book.id
+      book_id: req.params.id
     }
   })
   .then((reviews) => {
     if (!reviews) {
-      res.status(404).end()
+      throw HttpError(404)
     } else {
       res.status(200).send(reviews)
     }
@@ -104,7 +109,7 @@ Router.delete('/:id', (req, res, next) => {
     if (num) {
       res.sendStatus(204)
     } else {
-      res.sendStatus(404)
+      throw HttpError(404)
     }
   })
   .catch(next)

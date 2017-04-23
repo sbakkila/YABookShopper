@@ -39,19 +39,28 @@ module.exports = db => db.define('books', {
     type: STRING,
     allowNull: false,
     unique: true
-  }
+  },
+  // avgRating: {
+  //   type: INTEGER,
+  //   validate: {
+  //     min: 0
+  //   }
+  // }
 }, {
-  instanceMethods: {
+  getterMethods: {
+    // Todo: This needs to be a getter method but there is an issue as it returns a promise
     getAvgRating: function() {
       return this.getReviews()
-      .then(reviews => {
-        let total = 0
-        reviews.forEach(review => {
-          total += review.rating
+        .then(reviews => {
+          let total = 0
+          reviews.forEach(review => {
+            total += review.rating
+          })
+          return total/reviews.length
         })
-        return total/reviews.length
-      })
-    },
+    }
+  },
+  instanceMethods: {
     isAvailable: function() {
       return this.inventory > 0
     },
