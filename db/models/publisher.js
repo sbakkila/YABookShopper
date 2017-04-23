@@ -12,5 +12,5 @@ module.exports = db => db.define('publisher', {
 })
 
 module.exports.associations = (Publisher, {Book}) => {
-  Publisher.belongsTo(Book)
+  Publisher.hasMany(Book)
 }

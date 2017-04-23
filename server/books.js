@@ -7,12 +7,13 @@ const Author = db.model('author')
 const Review = db.model('review')
 const Genre = db.model('genre')
 const Publisher = db.model('publisher')
+const Genre = db.model('genre')
 
 Router.param('id', function(req, res, next, id) {
   // we want to add eager loading for reviews
-  console.log('inside params')
+
   Book.findById(Number(id),
-  { include: [{ model: Genre }, { model: Review }] })
+  { include: [{model: Genre}, {model: Publisher}, {model: Author}] })
   .then(book => {
     if (!book) {
       // can refactor to use HttpError later
