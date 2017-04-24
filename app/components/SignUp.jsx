@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
-
-class SignUpForm extends React.Component {
+class SignUp extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -76,10 +75,4 @@ class SignUpForm extends React.Component {
   }
 }
 
-import {connect} from 'react-redux'
-import {signup} from 'APP/app/reducers/auth'
-
-export default connect(
-  state=> ({}),
-  {signup}
-)(SignUpForm)
+export default SignUp
