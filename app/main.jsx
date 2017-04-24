@@ -11,11 +11,18 @@ import NotFound from './components/NotFound'
 import Books from './components/Books'
 
 import AllBooksContainer from './containers/AllBooksContainer'
+import SingleBookContainer from './containers/SingleBookContainer'
 
 import {loadBooks} from './action-creators/books'
+import {loadBook} from './action-creators/book'
 
 const onBooksEnter = function(nextRouterState) {
   store.dispatch(loadBooks())
+}
+
+const onBookEnter = function(nextRouterState) {
+  const bookId = nextRouterState.params.id
+  store.dispatch(loadBook(bookId))
 }
 
 const ExampleApp = connect(
@@ -36,6 +43,7 @@ render(
       <Route path="/" component={ExampleApp}>
         <IndexRedirect to="/books" />
         <Route path="/books" component={AllBooksContainer} onEnter={onBooksEnter} />
+        <Route path="/books/:id" component={SingleBookContainer} onEnter={onBookEnter} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
