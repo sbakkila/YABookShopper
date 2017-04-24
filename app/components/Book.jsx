@@ -63,6 +63,7 @@ const Book = (props) => {
               </div>
               <div className="tab-pane fade" id="service-three">
                 <section className="container product-info">
+                  {/*todo: also return user from review.user_id*/}
                   {
                     props.book.reviews && props.book.reviews.map((review) => {
                       return review.text
