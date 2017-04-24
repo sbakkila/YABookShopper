@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Books from '../components/Books'
+import Orders from '../components/Orders'
 
 function mapStateToProps(state) {
   return {
@@ -7,8 +7,8 @@ function mapStateToProps(state) {
   }
 }
 
-const AllBooksContainer = connect(
+const AllOrdersContainer = connect(
   mapStateToProps
-)(AllOrders)
+)(Orders)
 
-export default AllBooksContainer
+export default AllOrdersContainer
