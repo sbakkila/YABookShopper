@@ -14,6 +14,24 @@ module.exports = db => db.define('review', {
     },
     allowNull: false
   }
+}, {
+  hooks: {
+    afterCreate: function(review, options) {
+      review.getBook()
+            .then(book => {
+              this.findAll({
+                where: {
+                  book_id: book.id
+                }
+              })
+                .then(reviews => {
+                  const total = reviews.reduce((acc, review) => acc + review.rating, 0)
+                  book.avgRating = (reviews.length) ? total / reviews.length : 0
+                  book.save()
+                })
+            })
+    }
+  }
 })
 
 module.exports.associations = (Review, {User, Book}) => {

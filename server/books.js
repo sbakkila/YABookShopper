@@ -8,7 +8,6 @@ const Author = db.model('author')
 const Review = db.model('review')
 const Genre = db.model('genre')
 const Publisher = db.model('publisher')
-const Genre = db.model('genre')
 
 Router.param('id', function(req, res, next, id) {
   // we want to add eager loading for reviews
@@ -36,9 +35,8 @@ Router.get('/:id', (req, res) => {
 Router.get('/', (req, res, next) => {
   if (req.query) {
     next()
-  }
-  else {
-    Book.findAll({ include: [Author] })
+  } else {
+    Book.findAll({ include: [{model: Review}, {model: Author}] })
     .then(books => res.send(books))
     .catch(next)
   }
@@ -48,13 +46,9 @@ Router.get('/', (req, res, next) => {
 Router.get('/', function(req, res, next) {
   Book.findAll({
     where: req.query,
-    include: [
-      {model: Author},
-      {model: Review}
-    ]
-    // include: [Author]
+    include: [{model: Author}, {model: Review}]
   })
-  .then(function(books) {
+  .then((books) => {
     if (!books) {
       throw HttpError(404)
     } else {

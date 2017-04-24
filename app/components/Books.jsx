@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 
 const Books = (props) => {
+  const starsForRating = (number, classNameText) => {
+    const stars = []
+    for (let i = 0; i< number; i++) {
+      stars.push(<i key={i} className={classNameText}/>)
+    }
+    return stars
+  }
   return (
     <div className="container">
       <div className="row">
@@ -9,7 +16,7 @@ const Books = (props) => {
             <h3>Books</h3>
           </div>
         </div>
-        <div className="item active">
+        <div className="item">
           <div className="row">
             {
               props.allBooks && props.allBooks.map((book, idx) => (
@@ -22,19 +29,18 @@ const Books = (props) => {
                       <div className="row">
                         <div className="price col-md-6">
                           <h5>{book.title}</h5>
-                          <h5 className="price-text-color">{book.priceInCents}</h5>
+                          <h5 className="price-text-color">$ {book.priceInCents/100}</h5>
                           <h5
                             className="price-text-color">{book.authors[0] ? props.allBooks[idx].authors[0].firstName : 'no author listed'}</h5>
 
                         </div>
                         <div className="rating hidden-sm col-md-6">
                           {
-                            // this is under construction as book.getAvgRating() returns a promise and not the actual number
-                            // book.getAvgRating && book.getAvgRating.map(avgRating => {
-                            //   return (<i className="price-text-color fa fa-star"/>)
-                            // })
+                            starsForRating(book.avgRating, 'price-text-color fa fa-star')
                           }
-                          <i className="fa fa-star"/>
+                          {
+                            starsForRating(5 - book.avgRating, 'fa fa-star')
+                          }
                         </div>
                       </div>
                       <div className="separator clear-left">
