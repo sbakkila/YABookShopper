@@ -8,7 +8,7 @@ api
   .use('/users', require('./users'))
   .use('/books', require('./books'))
   .use('/authors', require('./authors'))
-  .use('/order', require('./order'))
+  .use('/orders', require('./orders'))
   .use('/genre', require('./genre'))
 
 // No routes matched? 404.
