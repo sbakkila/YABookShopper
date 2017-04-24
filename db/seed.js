@@ -320,6 +320,10 @@ const bookAuthors = seed(AuthorsBooks,
       author_id: authors.KA_Applegate.id,
       book_id: books.Animorphs.id
     },
+    'denise wrote the wrinke in time': {
+      author_id: authors.KA_Applegate.id,
+      book_id: books.A_Wrinkle_in_Time.id
+    }
   })
 )
 
