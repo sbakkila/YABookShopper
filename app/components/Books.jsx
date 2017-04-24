@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 
 const Books = (props) => {
   const starsForRating = (number, classNameText) => {
     const stars = []
-    for (let i = 0; i< number; i++) {
-      stars.push(<i key={i} className={classNameText}/>)
+    for (let i = 0; i < number; i++) {
+      stars.push(<i key={i} className={classNameText} />)
     }
     return stars
   }
@@ -25,13 +25,13 @@ const Books = (props) => {
                 <div key={book.id} className="col-sm-3">
                   <div className="col-item">
                     <div className="photo">
-                      <Link to={`/books/${book.id}`}><img src={book.photoUrl} className="img-responsive" alt="a"/></Link>
+                      <Link to={`/books/${book.id}`}><img src={book.photoUrl} className="img-responsive" alt="a" /></Link>
                     </div>
                     <div className="info">
                       <div className="row">
                         <div className="price col-md-6">
                           <h5>{book.title}</h5>
-                          <h5 className="price-text-color">$ {book.priceInCents/100}</h5>
+                          <h5 className="price-text-color">$ {book.priceInCents / 100}</h5>
                           <h5
                             className="price-text-color">{book.authors[0] ? props.allBooks[idx].authors[0].firstName : 'no author listed'}</h5>
 
@@ -47,10 +47,11 @@ const Books = (props) => {
                       </div>
                       <div className="separator clear-left">
                         <p className="btn-add">
-                          <i className="fa fa-shopping-cart"/><a href="http://www.jquery2dotnet.com"
-                                                                    className="hidden-sm">Add to cart</a></p>
+                          <i className="fa fa-shopping-cart" />
+                          <Link to={`/cart`} className="hidden-sm">Add to cart</Link>
+                        </p>
                         <p className="btn-details">
-                          <i className="fa fa-list"/><Link to={`/books/${book.id}`} className="hidden-sm">More
+                          <i className="fa fa-list" /><Link to={`/books/${book.id}`} className="hidden-sm">More
                           details</Link></p>
                       </div>
                       <div className="clearfix">

@@ -18,8 +18,8 @@ router.get('/', (req, res, next) => {
     .then(cart => res.status(201).json(cart))
     .catch(next)
   } else {
-    console.log("That functionality is not running yet... please log in.")
-    res.json({you_need_to: "log in"})
+    console.log('That functionality is not running yet... please log in.')
+    res.json({you_need_to: 'log in'})
   }
 })
 
