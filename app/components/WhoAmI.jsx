@@ -2,7 +2,8 @@ import React from 'react'
 
 export const WhoAmI = ({ user, logout }) => (
   <div className="whoami">
-    <span className="whoami-user-name">{user && user.firstName}</span>
+    <span className="whoami-user-name">{ user ? user.firstName + ' is currently logged in!' : 'Please log in!'}</span>
+    <br />
     <button className="logout" onClick={logout}>Logout</button>
   </div>
 )

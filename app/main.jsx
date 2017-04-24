@@ -9,6 +9,7 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Books from './components/Books'
+import SignUpContainer from './components/SignUp'
 
 import AllBooksContainer from './containers/AllBooksContainer'
 
@@ -36,6 +37,7 @@ render(
       <Route path="/" component={Auth}>
         <IndexRedirect to="/books" />
         <Route path="/books" component={AllBooksContainer} onEnter={onBooksEnter} />
+        <Route path="/signup" component={SignUpContainer}/>
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
