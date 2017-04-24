@@ -9,10 +9,12 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Books from './components/Books'
-import SignUpContainer from './components/SignUp'
 
+import SignUpContainer from './containers/SignUpContainer'
 import AllBooksContainer from './containers/AllBooksContainer'
 import SingleBookContainer from './containers/SingleBookContainer'
+import AllOrdersContainer from './containers/AllOrdersContainer'
+import CartContainer from './containers/CartContainer'
 
 import {loadBooks} from './action-creators/books'
 import {loadBook} from './action-creators/book'
@@ -43,6 +45,8 @@ render(
       <Route path="/" component={Auth}>
         <IndexRedirect to="/books" />
         <Route path="/books" component={AllBooksContainer} onEnter={onBooksEnter} />
+        <Route path="/orders" component={AllOrdersContainer}/>
+        <Route path="/cart" component={CartContainer}/>
         <Route path="/signup" component={SignUpContainer}/>
         <Route path="/books/:id" component={SingleBookContainer} onEnter={onBookEnter} />
       </Route>
