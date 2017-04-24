@@ -2,12 +2,12 @@
 
 // bcrypt docs: https://www.npmjs.com/package/bcrypt
 const bcrypt = require('bcryptjs')
-    , {STRING, VIRTUAL, BOOLEAN} = require('sequelize')
+    , {STRING, VIRTUAL, BOOLEAN, TEXT} = require('sequelize')
 
 module.exports = db => db.define('users', {
   firstName: STRING,
   lastName: STRING,
-  address: STRING,
+  address: TEXT,
   email: {
     type: STRING,
     allowNull: false,
