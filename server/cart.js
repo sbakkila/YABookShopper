@@ -23,6 +23,7 @@ router.get('/', (req, res, next) => {
   }
 })
 
+// JM/IM - put normally takes an :id
 router.put('/', (req, res, next) => {
   if (req.user) {
     Order.findOne({

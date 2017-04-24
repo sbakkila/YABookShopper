@@ -1,6 +1,8 @@
 import axios from 'axios'
 import {browserHistory} from 'react-router'
 
+// JM/IM - *could extract out auth parts to follow architecture of other components
+
 const reducer = (state=null, action) => {
   switch (action.type) {
   case AUTHENTICATED:

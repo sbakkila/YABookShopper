@@ -11,6 +11,7 @@ class SignUp extends React.Component {
       address: ''
     }
 
+    // JM/IM - make all these one function to handle any change! (check Ian's slack)
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this)
     this.handleLastNameChange = this.handleLastNameChange.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)

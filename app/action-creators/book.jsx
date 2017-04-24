@@ -9,6 +9,7 @@ export const receiveBook = (book) => ({
 })
 
 // THUNK
+// JM/IM - use toastr for messages to user
 export const loadBook = function(id) {
   return function(dispatch) {
     axios.get(`/api/books/${id}`)

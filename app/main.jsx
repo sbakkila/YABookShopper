@@ -29,6 +29,8 @@ const onBookEnter = function(nextRouterState) {
   const bookId = nextRouterState.params.id
   store.dispatch(loadBook(bookId))
 }
+
+// JM/IM - *could* extract out auth component
 const Auth = connect(
   ({ auth }) => ({ user: auth })
 )(

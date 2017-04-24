@@ -4,6 +4,8 @@ const initialBooksState = {
   list: []
 }
 
+// JM/IB - new state not strictly necessary....
+
 const reducer = (state=initialBooksState, action) => {
   const newState = Object.assign({}, state)
 
@@ -15,6 +17,7 @@ const reducer = (state=initialBooksState, action) => {
   default:
     return state
   }
+  // JM/IB - return new state here (not strictly necessary)
 }
 
 export default reducer
