@@ -39,18 +39,23 @@ module.exports = db => db.define('books', {
     type: STRING,
     allowNull: false,
     unique: true
+  },
+  avgRating: {
+    type: INTEGER,
+    allowNull: true,
+    defaultValue: 0
   }
 }, {
   instanceMethods: {
     getAvgRating: function() {
       return this.getReviews()
-      .then(reviews => {
-        let total = 0
-        reviews.forEach(review => {
-          total += review.rating
+        .then(reviews => {
+          let total = 0
+          reviews.forEach(review => {
+            total += review.rating
+          })
+          return (reviews.length) ? total/reviews.length : 0
         })
-        return total/reviews.length
-      })
     },
     isAvailable: function() {
       return this.inventory > 0

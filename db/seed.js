@@ -1,8 +1,8 @@
 'use strict'
 
 const db = require('APP/db')
-    , {Book, Thing, Author, Favorite, User, AuthorsBooks, Publisher, Genre, BooksGenres, Review, Order, OrderItem, Promise} = db
-    , {mapValues} = require('lodash')
+  , {Book, Thing, Author, Favorite, User, AuthorsBooks, Publisher, Genre, BooksGenres, Review, Order, OrderItem, Promise} = db
+  , {mapValues} = require('lodash')
 
 function seedEverything() {
   const seeded = {
@@ -46,12 +46,11 @@ const things = seed(Thing, {
 const books = seed(Book, {
   Harry_Potter: {
     title: 'HP and the Philosophers Stone',
-    description: "Harry is sad but has and a magical stone",
+    description: 'Harry is sad but has and a magical stone',
     priceInCents: 789,
     inventory: 19,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51kQGQirOFL.jpg',
-    isbn: '0440918321',
-
+    isbn: '0440918321'
   },
   The_Golden_Compass: {
     title: 'The Golden Compass',
@@ -59,8 +58,7 @@ const books = seed(Book, {
     priceInCents: 719,
     inventory: 12,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51MyEYnpSFL.jpg',
-    isbn: '0440418321',
-
+    isbn: '0440418321'
   },
   A_Wrinkle_in_Time: {
     title: 'A Wrinkle in Time',
@@ -68,8 +66,7 @@ const books = seed(Book, {
     priceInCents: 1234,
     inventory: 5,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/41pG-zMla3L.jpg',
-    isbn: '1250004675',
-
+    isbn: '1250004675'
   },
   Twilight: {
     title: 'Twilight',
@@ -77,8 +74,7 @@ const books = seed(Book, {
     priceInCents: 1499,
     inventory: 14,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/41K99%2BcInvL.jpg',
-    isbn: '0316015849',
-
+    isbn: '0316015849'
   },
   The_Giver: {
     title: 'The Giver',
@@ -86,8 +82,7 @@ const books = seed(Book, {
     priceInCents: 357,
     inventory: 4,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51bLnbNy15L.jpg',
-    isbn: '0544336267',
-
+    isbn: '0544336267'
   },
   Lord_of_the_Flies: {
     title: 'Lord of the Flies',
@@ -95,8 +90,7 @@ const books = seed(Book, {
     priceInCents: 1377,
     inventory: 7,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/81UVwYPBtrL.jpg',
-    isbn: '0399501487',
-
+    isbn: '0399501487'
   },
   Animorphs: {
     title: 'Animorphs I: The Invasion',
@@ -104,8 +98,7 @@ const books = seed(Book, {
     priceInCents: 499,
     inventory: 2,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51uRsr7d71L.jpg',
-    isbn: '0399501420',
-
+    isbn: '0399501420'
   }
 })
 
@@ -333,13 +326,13 @@ const bookAuthors = seed(AuthorsBooks,
 const reviews = seed(Review,
   ({users, books}) => ({
     god_twilight: {
-      text: "We did not like this book. We mean, this is more or less why we decided not to make vampires. Everyone gets all soul-searchy and BDSM-y.",
+      text: 'We did not like this book. We mean, this is more or less why we decided not to make vampires. Everyone gets all soul-searchy and BDSM-y.',
       rating: 1,
       user_id: users.god.id,
       book_id: books.Twilight.id
     },
     god_giver: {
-      text: "Nice work Lois. Seriously, home run. That poor kid. Also we found the giver to be SUPER relatable.",
+      text: 'Nice work Lois. Seriously, home run. That poor kid. Also we found the giver to be SUPER relatable.',
       rating: 5,
       user_id: users.god.id,
       book_id: books.The_Giver.id
@@ -355,6 +348,30 @@ const reviews = seed(Review,
       rating: 4,
       user_id: users.barack.id,
       book_id: books.Animorphs.id
+    },
+    god_lord_of_flies: {
+      text: 'We did not like this book. We mean, this is more or less why we decided not to make vampires. Everyone gets all soul-searchy and BDSM-y.',
+      rating: 3,
+      user_id: users.god.id,
+      book_id: books.The_Golden_Compass.id
+    },
+    god_wrikle_time: {
+      text: 'Nice work Lois. Seriously, home run. That poor kid. Also we found the giver to be SUPER relatable.',
+      rating: 5,
+      user_id: users.god.id,
+      book_id: books.A_Wrinkle_in_Time.id
+    },
+    barack_golden_compass: {
+      text: "I think anytime one reads about dystopian societies, we immediately contemplate what's broken in our own communities. Or what's about to break. Or what's about to be purposefully dismantled by a malicious successor.",
+      rating: 4,
+      user_id: users.barack.id,
+      book_id: books.The_Golden_Compass.id
+    },
+    barack_Harry_Potter: {
+      text: "Many people are surprised to learn that this is my favorite book, and not the reason you're undoubtedly thinking.",
+      rating: 4,
+      user_id: users.barack.id,
+      book_id: books.Harry_Potter.id
     }
   })
 )
@@ -413,9 +430,9 @@ function seed(Model, rows) {
                 )
             }
           }).reduce(
-            (all, one) => Object.assign({}, all, {[one.key]: one.value}),
-            {}
-          )
+          (all, one) => Object.assign({}, all, {[one.key]: one.value}),
+          {}
+        )
         )
       )
       .then(seeded => {

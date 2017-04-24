@@ -11,6 +11,11 @@
     width: 100%;
 }
 
+img.img-responsive
+{
+    min-height:100%;
+    max-height:400px;
+}
 .col-item .info
 {
     padding: 10px;
