@@ -54,7 +54,7 @@ module.exports = db => {
     })
     .then(({ oauth, user }) => user ||
       OAuth.User.create({
-        email: profile.email
+        email: profile.emails[0].value
       })
       .then(user => db.Promise.props({
         user,
