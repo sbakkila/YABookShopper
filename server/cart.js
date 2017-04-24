@@ -23,4 +23,24 @@ router.get('/', (req, res, next) => {
   }
 })
 
+router.put('/', (req, res, next) => {
+  if (req.user) {
+    Order.findOne({
+      where: {
+        user_id: req.session.passport.user,
+        status: 'cart'
+      }
+    })
+    .then(cart => {
+      return OrderItem.create(req.body)
+      .then(thisOrder => cart.setOrderItem(thisOrder))
+    })
+    .then(cart => res.status(201).json(cart))
+    .catch(next)
+  } else {
+    console.log("That functionality is not running yet... please log in.")
+    res.json({you_need_to: "log in"})
+  }
+})
+
 module.exports = router

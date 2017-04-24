@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+
 import { Link } from 'react-router'
+
 
 const Books = (props) => {
   const starsForRating = (number, classNameText) => {
@@ -25,7 +27,8 @@ const Books = (props) => {
                 <div key={book.id} className="col-sm-3">
                   <div className="col-item">
                     <div className="photo">
-                      <Link to={`/books/${book.id}`}><img src={book.photoUrl} className="img-responsive" alt="a" /></Link>
+                      <Link to={`/books/${book.id}`}><img src={book.photoUrl} className="img-responsive" alt="a"/></Link>
+
                     </div>
                     <div className="info">
                       <div className="row">
@@ -52,6 +55,7 @@ const Books = (props) => {
                         </p>
                         <p className="btn-details">
                           <i className="fa fa-list" /><Link to={`/books/${book.id}`} className="hidden-sm">More
+
                           details</Link></p>
                       </div>
                       <div className="clearfix">
