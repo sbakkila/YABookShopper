@@ -1,22 +1,22 @@
-import { RECEIVE_BOOKS } from '../constants'
+import { RECEIVE_CART } from '../constants'
 import axios from 'axios'
 // maybe import browserHistory when we add a delete action?
 
 // Regular action
-export const receiveBooks = (allBooks) => ({
-  type: RECEIVE_BOOKS,
-  allBooks
+export const receiveCart = (cart) => ({
+  type: RECEIVE_CART,
+  cart
 })
 
 // THUNK
-export const loadBooks = function() {
+export const loadCart = function() {
   return function(dispatch) {
-    axios.get('/api/books')
+    axios.get('/api/cart')
     .then(function(res) {
       return res.data
     })
-    .then(function(books) {
-      const action = receiveBooks(books)
+    .then(function(cart) {
+      const action = receiveCart(cart)
       dispatch(action)
     })
     .catch(function(err) {

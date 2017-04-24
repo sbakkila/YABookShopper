@@ -13,11 +13,9 @@ export const loadBook = function(id) {
   return function(dispatch) {
     axios.get(`/api/books/${id}`)
     .then(function(res) {
-      // console.log('res: ', res)
       return res.data
     })
     .then(function(book) {
-      // console.log('books ', books)
       const action = receiveBook(book)
       dispatch(action)
     })
