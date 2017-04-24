@@ -21,6 +21,7 @@ Router.param('id', function(req, res, next, id) {
     } else {
       req.book = book
       next()
+      return null
     }
   })
     .catch(next)
