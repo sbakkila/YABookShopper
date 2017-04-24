@@ -13,7 +13,13 @@ Router.param('id', function(req, res, next, id) {
   // we want to add eager loading for reviews
 
   Book.findById(Number(id),
-  { include: [{model: Genre}, {model: Publisher}, {model: Author}] })
+    { include: [
+      {model: Genre},
+      {model: Publisher},
+      {model: Author},
+      {model: Review}
+    ]
+    })
   .then(book => {
     if (!book) {
       // can refactor to use HttpError later

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router'
 
 const Books = (props) => {
   const starsForRating = (number, classNameText) => {
@@ -20,10 +21,11 @@ const Books = (props) => {
           <div className="row">
             {
               props.allBooks && props.allBooks.map((book, idx) => (
+
                 <div key={book.id} className="col-sm-3">
                   <div className="col-item">
                     <div className="photo">
-                      <img src={book.photoUrl} className="img-responsive" alt="a"/>
+                      <Link to={`/books/${book.id}`}><img src={book.photoUrl} className="img-responsive" alt="a"/></Link>
                     </div>
                     <div className="info">
                       <div className="row">
@@ -48,8 +50,8 @@ const Books = (props) => {
                           <i className="fa fa-shopping-cart"/><a href="http://www.jquery2dotnet.com"
                                                                     className="hidden-sm">Add to cart</a></p>
                         <p className="btn-details">
-                          <i className="fa fa-list"/><a href="http://www.jquery2dotnet.com" className="hidden-sm">More
-                          details</a></p>
+                          <i className="fa fa-list"/><Link to={`/books/${book.id}`} className="hidden-sm">More
+                          details</Link></p>
                       </div>
                       <div className="clearfix">
                       </div>
