@@ -8,13 +8,14 @@ const Book = db.model('books')
 
 router.get('/', (req, res, next) => {
   if (req.user) {
-    Order.findAll({
+    Order.findOne({
       where: {
-        user_id: req.session.passport.user
+        user_id: req.session.passport.user,
+        status: 'cart'
       },
       include: [{model: OrderItem, include: [{model: Book}]}]
     })
-    .then(orders => res.status(201).json(orders))
+    .then(cart => res.status(201).json(cart))
     .catch(next)
   } else {
     console.log("That functionality is not running yet... please log in.")
