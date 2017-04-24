@@ -18,7 +18,7 @@ const onBooksEnter = function(nextRouterState) {
   store.dispatch(loadBooks())
 }
 
-const ExampleApp = connect(
+const Auth = connect(
   ({ auth }) => ({ user: auth })
 )(
   ({ user, children }) =>
@@ -33,7 +33,7 @@ const ExampleApp = connect(
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={ExampleApp}>
+      <Route path="/" component={Auth}>
         <IndexRedirect to="/books" />
         <Route path="/books" component={AllBooksContainer} onEnter={onBooksEnter} />
       </Route>
