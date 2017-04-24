@@ -9,6 +9,7 @@ api
   .use('/books', require('./books'))
   .use('/authors', require('./authors'))
   .use('/orders', require('./orders'))
+  .use('/cart', require('./cart'))
   .use('/genre', require('./genre'))
 
 // No routes matched? 404.
