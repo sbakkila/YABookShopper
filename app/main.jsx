@@ -10,7 +10,9 @@ import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Books from './components/Books'
 
-import SignUpContainer from './containers/SignUpContainer'
+import SignUpContainer from './components/SignUp'
+import Cart from './components/Cart'
+
 import AllBooksContainer from './containers/AllBooksContainer'
 import SingleBookContainer from './containers/SingleBookContainer'
 import AllOrdersContainer from './containers/AllOrdersContainer'
