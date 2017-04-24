@@ -12,6 +12,7 @@ const reducer = (state={}, action) => {
   default:
     return state
   }
+  // JM/IM - return new state here.... because maybe we'll be adding more stuff later
 }
 
 export default reducer

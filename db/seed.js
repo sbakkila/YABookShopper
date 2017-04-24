@@ -1,5 +1,6 @@
 'use strict'
 
+// JM/IM - faker or any number of other fake data generators (once we figure out join table stuff...)
 const db = require('APP/db')
   , {Book, Thing, Author, Favorite, User, AuthorsBooks, Publisher, Genre, BooksGenres, Review, Order, OrderItem, Promise} = db
   , {mapValues} = require('lodash')
