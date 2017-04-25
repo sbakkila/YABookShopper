@@ -18,9 +18,11 @@ import CartContainer from './containers/CartContainer'
 
 import {loadBooks} from './action-creators/books'
 import {loadBook} from './action-creators/book'
+import {loadCart} from './action-creators/cart'
 
-const onBooksEnter = function(nextRouterState) {
+const fetchInitialData = function(nextRouterState) {
   store.dispatch(loadBooks())
+  store.dispatch(loadCart())
 }
 
 const onBookEnter = function(nextRouterState) {
@@ -31,7 +33,7 @@ const onBookEnter = function(nextRouterState) {
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={Auth} onEnter={onBooksEnter}>
+      <Route path="/" component={Auth} onEnter={fetchInitialData}>
         <IndexRoute component={AllBooksContainer} />
         <Route path="/books" component={AllBooksContainer} />
         <Route path="/orders" component={AllOrdersContainer}/>

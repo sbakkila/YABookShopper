@@ -10,7 +10,7 @@ const Auth = connect(
 )(
   ({ user, children }) =>
     <div id="main" className="container-fluid">
-      <Navbar user={user ? <WhoAmI/> : <Login/>}/>
+      <Navbar user={user}/>
         {children}
       <Footer />
     </div>

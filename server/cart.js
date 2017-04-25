@@ -23,6 +23,7 @@ router.get('/', (req, res, next) => {
   }
 })
 
+//Todo: import id, authorized
 router.put('/', (req, res, next) => {
   if (req.user) {
     Order.findOne({

@@ -1,4 +1,4 @@
-import { RECEIVE_CART } from '../constants'
+import { RECEIVE_CART, UPDATE_CART } from '../constants'
 
 const initialCartState = {}
 
@@ -7,6 +7,7 @@ const reducer = (state=initialCartState, action) => {
 
   switch (action.type) {
   case RECEIVE_CART:
+  case UPDATE_CART:
     newState = action.cart
     return newState
 
