@@ -1,14 +1,34 @@
-import { RECEIVE_BOOK } from '../constants'
+import { RECEIVE_BOOK, RECEIVE_REVIEW } from '../constants'
 import axios from 'axios'
-// maybe import browserHistory when we add a delete action?
+import {browserHistory} from 'react-router'
 
-// Regular action
+// Regular actions
 export const receiveBook = (book) => ({
   type: RECEIVE_BOOK,
   book
 })
 
-// THUNK
+export const receiveReview = (review) => ({
+  type: RECEIVE_REVIEW,
+  review
+})
+
+export const makeReview = (reviewObj, bookId) =>
+  dispatch =>
+    axios.post(`/api/books/${bookId}/review`,
+      reviewObj)
+      .then(function(res) {
+        return res.data
+      })
+      .then(review => {
+        const action = receiveReview(review)
+        dispatch(action)
+      })
+      .catch(function(err) {
+        console.error(err)
+      })
+
+// THUNKs
 export const loadBook = function(id) {
   return function(dispatch) {
     axios.get(`/api/books/${id}`)

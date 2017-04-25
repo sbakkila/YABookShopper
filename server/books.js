@@ -92,6 +92,18 @@ Router.get('/:id/reviews', (req, res, next) => {
   .catch(next)
 })
 
+Router.post('/:id/review', (req, res, next) => {
+  console.log('hitting the review creation route')
+  const newReview = req.body
+  newReview.book_id = req.params.id
+  newReview.user_id = req.user.id
+  Review.create(newReview)
+  .then(review => {
+    res.send(review)
+  }
+)
+})
+
 Router.put('/:id', (req, res, next) => {
   // ToDo: find user, check if they are an admin
   req.book.update(req.body)

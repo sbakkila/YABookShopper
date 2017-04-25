@@ -1,4 +1,6 @@
 import React from 'react'
+import {browserHistory} from 'react-router'
+//TODO: style this!
 
 export const Login = ({ login }) => (
   <div>
@@ -9,14 +11,28 @@ export const Login = ({ login }) => (
     <input name="username" />
     <input name="password" type="password" />
     <input type="submit" value="Login" />
-    <a href="/api/auth/login/google">Login with google</a>
-    <a href="/api/auth/login/facebook">Login with facebook</a>
-    <a href="/api/auth/login/github">Login with github</a>
-    <a href="/signup">Sign up!</a>
+
   </form>
+  <form className="oauthButtons" onSubmit={ evt => {
+      evt.preventDefault()
+      window.location.href='api/auth/login/google'
+    }
+    }>
+    <input className="oauthButtons" type="submit" value="Login with Google"></input>
+  </form>
+  <form onSubmit={ evt => {
+      evt.preventDefault()
+      browserHistory.push('/signup')
+    }
+    }>
+    <input type="submit" value="Sign Up"></input>
+  </form>
+
   </div>
 )
 
+// <a href="/api/auth/login/google">Login with google</a>
+// <a href="/signup">Sign up!</a>
 import {login} from 'APP/app/reducers/auth'
 import {connect} from 'react-redux'
 

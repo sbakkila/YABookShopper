@@ -1,7 +1,6 @@
 
 import React from 'react'
 
-// will also import review stuff here
 const Book = (props) => {
   const starsForRating = (number, classNameText) => {
     const stars = []
@@ -10,6 +9,7 @@ const Book = (props) => {
     }
     return stars
   }
+  console.log('book: ', props)
   return (
     <div className="container-fluid">
       <div className="content-wrapper">
@@ -17,27 +17,27 @@ const Book = (props) => {
           <div className="container">
             <div className="col-md-12">
               <div className="product col-md-3 service-image-left">
-                  <img id="item-display" src={props.book.photoUrl} alt=""/>
+                  <img id="item-display" src={props.book.currentBook.photoUrl} alt=""/>
               </div>
             </div>
 
             <div className="col-md-7">
-              <div className="product-title">{props.book.title}</div>
-              <div className="product-desc">{props.book.authors ? `${props.book.authors[0].firstName} ${props.book.authors[0].lastName}` : 'no author listed'}</div>
+              <div className="product-title">{props.book.currentBook.title}</div>
+              <div className="product-desc">{props.book.currentBook.authors ? `${props.book.currentBook.authors[0].firstName} ${props.book.currentBook.authors[0].lastName}` : 'no author listed'}</div>
               <div className="product-rating">
                 {
-                  starsForRating(props.book.avgRating, 'fa fa-star gold')
+                  starsForRating(props.book.currentBook.avgRating, 'fa fa-star gold')
                 }
                 {
-                  starsForRating(5 - props.book.avgRating, 'fa fa-star-o')
+                  starsForRating(5 - props.book.currentBook.avgRating, 'fa fa-star-o')
                 }
               </div>
 
-                <div className="product-price">$ {props.book.priceInCents/100}</div>
-                <div className="product-stock">{props.book.inventory > 0 ? 'In Stock' : 'Out of Stock'}</div>
+                <div className="product-price">$ {props.book.currentBook.priceInCents/100}</div>
+                <div className="product-stock">{props.book.currentBook.inventory > 0 ? 'In Stock' : 'Out of Stock'}</div>
 
                   <div className="btn-group cart">
-                    <button type="button" className={props.book.inventory > 0 ? 'btn btn-success' : 'btn btn-success disabled'} >
+                    <button type="button" className={props.book.currentBook.inventory > 0 ? 'btn btn-success' : 'btn btn-success disabled'} >
                       Add to cart
                     </button>
                   </div>
@@ -57,7 +57,7 @@ const Book = (props) => {
               <div className="tab-pane fade in active" id="service-one">
 
                 <section className="container product-info">
-                  {props.book.description}
+                  {props.book.currentBook.description}
                 </section>
 
               </div>
@@ -65,8 +65,8 @@ const Book = (props) => {
                 <section className="container product-info">
                   {/*todo: also return user from review.user_id*/}
                   {
-                    props.book.reviews && props.book.reviews.map((review) => {
-                      return review.text
+                    props.book.currentBook.reviews && props.book.currentBook.reviews.map((review, idx) => {
+                      return <li key={idx}>{review.text}</li>
                     })
                   }
                 </section>
@@ -76,7 +76,9 @@ const Book = (props) => {
         </div>
 
       </div>
+      {props.children}
     </div>
+
   )
 }
 

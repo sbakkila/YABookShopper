@@ -248,3 +248,8 @@ img.img-responsive
     margin-left: auto;
     margin-bottom: auto;
 }
+
+.oauthButtons {
+  display: inline;
+  float: left;
+}

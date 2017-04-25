@@ -1,9 +1,11 @@
 import { connect } from 'react-redux'
 import Book from '../components/Book'
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    book: state.book
+    child: ownProps.children,
+    book: state.book,
+    reviews: state.book.reviews
   }
 }
 

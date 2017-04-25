@@ -17,6 +17,7 @@ import AllBooksContainer from './containers/AllBooksContainer'
 import SingleBookContainer from './containers/SingleBookContainer'
 import AllOrdersContainer from './containers/AllOrdersContainer'
 import CartContainer from './containers/CartContainer'
+import NewReviewContainer from './containers/NewReviewContainer'
 
 import {loadBooks} from './action-creators/books'
 import {loadBook} from './action-creators/book'
@@ -50,7 +51,9 @@ render(
         <Route path="/orders" component={AllOrdersContainer}/>
         <Route path="/cart" component={CartContainer}/>
         <Route path="/signup" component={SignUpContainer}/>
-        <Route path="/books/:id" component={SingleBookContainer} onEnter={onBookEnter} />
+        <Route path="/books/:id" component={SingleBookContainer} onEnter={onBookEnter} >
+          <Route path="review" component={NewReviewContainer} />
+        </Route>
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
