@@ -38,7 +38,7 @@ export const addToCart = function(book) {
         return res.data
       })
       .then(function(cart) {
-        const action = receiveCart(cart)
+        const action = updateCart(cart)
         dispatch(action)
       })
       .catch(function(err) {

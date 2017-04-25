@@ -8,8 +8,8 @@ class Books extends React.Component {
     console.log(props, 'props in books, we  need the card')
     this.addToCart = this.addToCart.bind(this)
   }
-  addToCart(event) {
-    console.log(event, 'here this is an event')
+  addToCart(book) {
+    this.props.addToCart(book)
   }
   render() {
     const starsForRating = (number, classNameText) => {
@@ -60,7 +60,7 @@ class Books extends React.Component {
                         <div className="separator clear-left">
                           <p className="btn-add">
                             <i className="fa fa-shopping-cart"/>
-                            <a href='#' onClick={this.addToCart} className="hidden-sm">Add to cart</a>
+                            <a href='#' onClick={() => this.addToCart(book)} className="hidden-sm">Add to cart</a>
                           </p>
                           <p className="btn-details">
                             <i className="fa fa-list"/><Link to={`/books/${book.id}`} className="hidden-sm">More
