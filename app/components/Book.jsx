@@ -7,9 +7,8 @@ const Book = (props) => {
     for (let i = 0; i< number; i++) {
       stars.push(<i key={i} className={classNameText}/>)
     }
-    return stars        
+    return stars
   }
-  console.log('book: ', props)
   return (
     <div className="container-fluid">
       <div className="content-wrapper">
@@ -63,11 +62,9 @@ const Book = (props) => {
               </div>
               <div className="tab-pane fade" id="service-three">
                 <section className="container product-info">
-                  {/*todo: also return user from review.user_id*/}
+                  {/* todo: also return user from review.user_id */}
                   {
-                    props.book.currentBook.reviews && props.book.currentBook.reviews.map((review, idx) => {
-                      return <li key={idx}>{review.text}</li>
-                    })
+                    props.book.currentBook.reviews && props.book.currentBook.reviews.map((review, idx) => <li key={idx}>{review.text}</li>)
                   }
                 </section>
               </div>

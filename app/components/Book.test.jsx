@@ -5,11 +5,11 @@ chai.use(require('chai-enzyme')())
 import { shallow } from 'enzyme'
 
 import Book from './Book.jsx'
-                                                                           
-/* global des       cribe it beforeEach */
+
+/* global describe it beforeEach */
 describe('<Book />', () => {
-  let book = {}
-                           currentBook = {
+  const book ={}
+  book.currentBook = {
     title: 'The Little Prince',
     author: 'Antoine de Saint-Exupéry',
     description: 'Cherished by all',
@@ -22,15 +22,14 @@ describe('<Book />', () => {
 
   let root
   beforeEach('render the root', () => {
-    const {kiddybook} = book
-    console.log(kiddybook)
-    root = shallow(<Book book={kiddybook}/>)
+    root = shallow(<Book book={book}/>)
   })
 
   it.only('shows the book title', () => {
     console.log(root, 'root')
+    console.log(root.find('div[className="product-title"]'), 'finding the root')
         //   root.setState({ book })
-    expect(root.find('div[className="product-title"]')).to.equal('The Little Prince')
+    expect(root.find('div[className="col-md-7"]')).to.have.html('<div class="col-md-7"><div class="product-title">The Little Prince</div><div class="product-desc">no author listed</div><div class="product-rating"><i class="fa fa-star gold"></i><i class="fa fa-star gold"></i><i class="fa fa-star gold"></i><i class="fa fa-star gold"></i><i class="fa fa-star-o"></i></div><div class="product-price">$ 6</div><div class="product-stock">Out of Stock</div><div class="btn-group cart"><button type="button" class="btn btn-success disabled">Add to cart</button></div></div>')
   })
 
   it('shows the author', () => {
