@@ -99,7 +99,7 @@ const books = seed(Book, {
     description: 'At the dawn of the next world war, a plane crashes on an uncharted island, stranding a group of schoolboys. At first, with no adult supervision, their freedom is something to celebrate. This far from civilization they can do anything they want. Anything. But as order collapses, as strange howls echo in the night, as terror begins its reign, the hope of adventure seems as far removed from reality as the hope of being rescued.',
     priceInCents: 499,
     inventory: 2,
-    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51uRsr7d71L.jpg',
+    photoUrl: 'https://upload.wikimedia.org/wikipedia/en/c/c9/The_Invasion_Front_Cover.jpg',
     isbn: '0399501420'
   }
 })
