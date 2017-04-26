@@ -7,7 +7,7 @@ const Book = (props) => {
     for (let i = 0; i< number; i++) {
       stars.push(<i key={i} className={classNameText}/>)
     }
-    return stars
+    return stars        
   }
   console.log('book: ', props)
   return (
