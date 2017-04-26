@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
   if (req.user) {
     Order.findOne({
       where: {
-        user_id: req.session.passport.user,
+        user_id: req.user.id,
         status: 'cart'
       },
       include: [{model: OrderItem, include: [{model: Book}]}]
@@ -23,23 +23,44 @@ router.get('/', (req, res, next) => {
   }
 })
 
+// Todo: import id, authorized
 router.put('/', (req, res, next) => {
   if (req.user) {
     Order.findOne({
       where: {
-        user_id: req.session.passport.user,
+        user_id: req.user.id,
         status: 'cart'
       }
     })
     .then(cart => {
-      return OrderItem.create(req.body)
-      .then(thisOrder => cart.setOrderItem(thisOrder))
+      return OrderItem.findOrCreate({
+        where: {
+          book_id: req.body.id,
+          order_id: cart.id
+        },
+        defaults: {
+          priceAtPurchase: req.body.priceInCents,
+          book_id: req.body.id,
+          order_id: cart.id
+        }
+      })
+        .spread((orderItem, created) => {
+          if (!created) {
+            orderItem.quantity++
+            return orderItem.save()
+          }
+        })
+        .then(() => {
+          return cart.reload()
+        })
     })
-    .then(cart => res.status(201).json(cart))
+    .then(cart => {
+      res.status(201).json(cart)
+    })
     .catch(next)
   } else {
-    console.log("That functionality is not running yet... please log in.")
-    res.json({you_need_to: "log in"})
+    console.log('That functionality is not running yet... please log in.')
+    res.json({you_need_to: 'log in'})
   }
 })
 

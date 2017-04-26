@@ -19,6 +19,7 @@ export const Login = ({ login }) => (
     }
     }>
     <input className="oauthButtons" type="submit" value="Login with Google"></input>
+
   </form>
   <form onSubmit={ evt => {
       evt.preventDefault()
