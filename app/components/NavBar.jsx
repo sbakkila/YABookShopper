@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import { Link } from 'react-router'
 import Login from './Login'
 import WhoAmI from './WhoAmI'
-
+import Cart from '../components/Cart'
+import {connect} from 'react-redux'
 /* -----------------    COMPONENT     ------------------ */
 
 class Navbar extends React.Component {
@@ -33,22 +34,30 @@ class Navbar extends React.Component {
             <ul className="nav navbar-nav navbar-right">
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                  <span className="glyphicon glyphicon-shopping-cart"/> 7 - Items<span className="caret"/></a>
+                  <span className="glyphicon glyphicon-shopping-cart"/> {this.props.cart.totalOrderItems} - Items<span className="caret"/></a>
                 <ul className="dropdown-menu dropdown-cart" role="menu">
-                  <li>
-                  <span className="item">
-                    <span className="item-left">
-                        <img src="http://lorempixel.com/50/50/" alt="" />
-                        <span className="item-info">
-                            <span>Item name</span>
-                            <span>23$</span>
+                  {
+                    this.props.cart.orderItems && this.props.cart.orderItems.map((orderItem) => {
+                      return (
+                        <li key={orderItem.id}>
+                          <span className="item">
+                            <span className="item-left">
+                                <img src={orderItem.book.photoUrl} alt="" />
+                                <span className="item-info">
+                                    <span>{orderItem.book.title}</span>
+                                    <span>$ {orderItem.priceAtPurchase/100}</span>
+                                  <span><input type="number" value={orderItem.quantity}/></span>
+                                </span>
+                            </span>
+                            <span className="item-right">
+                                <button className="btn btn-xs btn-danger pull-right">x</button>
+                            </span>
                         </span>
-                    </span>
-                    <span className="item-right">
-                        <button className="btn btn-xs btn-danger pull-right">x</button>
-                    </span>
-                </span>
-                  </li>
+                          <hr/>
+                        </li>
+                      )
+                    })
+                  }
                   <li className="divider"/>
                   <li><a className="text-center" href="">View Cart</a></li>
                 </ul>
@@ -60,4 +69,15 @@ class Navbar extends React.Component {
     )
   }
 }
-export default Navbar
+
+function mapStateToProps(state) {
+  return {
+    cart: state.cart
+  }
+}
+
+const NavContainer = connect(
+  mapStateToProps
+)(Navbar)
+
+export default NavContainer

@@ -14,7 +14,7 @@ module.exports = db => db.define('orderItem', {
   }
 }, {
   hooks: {
-    afterCreate: function totalOrderItems(orderItem, options) {
+    beforeCreate: function totalOrderItems(orderItem, options) {
       return orderItem.getOrder()
         .then(order => {
           return this.findAll({
@@ -28,7 +28,7 @@ module.exports = db => db.define('orderItem', {
             })
         })
     },
-    afterUpdate: function totalOrderItems(orderItem, options) {
+    beforeUpdate: function totalOrderItems(orderItem, options) {
       return orderItem.getOrder()
         .then(order => {
           return this.findAll({

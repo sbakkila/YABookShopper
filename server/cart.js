@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
   if (req.user) {
     Order.findOne({
       where: {
-        user_id: req.session.passport.user,
+        user_id: req.user.id,
         status: 'cart'
       },
       include: [{model: OrderItem, include: [{model: Book}]}]
@@ -28,12 +28,12 @@ router.put('/', (req, res, next) => {
   if (req.user) {
     Order.findOne({
       where: {
-        user_id: req.session.passport.user,
+        user_id: req.user.id,
         status: 'cart'
       }
     })
     .then(cart => {
-      OrderItem.findOrCreate({
+      return OrderItem.findOrCreate({
         where: {
           book_id: req.body.id,
           order_id: cart.id
@@ -47,12 +47,16 @@ router.put('/', (req, res, next) => {
         .spread((orderItem, created) => {
           if (!created) {
             orderItem.quantity++
-            orderItem.save()
+            return orderItem.save()
           }
         })
-      return cart
+        .then(() => {
+          return cart.reload()
+        })
     })
-    .then(cart => res.status(201).json(cart))
+    .then(cart => {
+      res.status(201).json(cart)
+    })
     .catch(next)
   } else {
     console.log('That functionality is not running yet... please log in.')
