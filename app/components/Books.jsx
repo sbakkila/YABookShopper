@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import { Link } from 'react-router'
 
+
 class Books extends React.Component {
   constructor(props) {
     super(props)
@@ -32,12 +33,10 @@ class Books extends React.Component {
               {
                 this.props.allBooks && this.props.allBooks.map((book, idx) => (
 
-                  <div key={book.id} className="col-sm-3">
-                    <div className="col-item">
-                      <div className="photo">
-                        <Link to={`/books/${book.id}`}><img src={book.photoUrl} className="img-responsive"
-                                                            alt="a"/></Link>
-
+                <div key={book.id} className="col-sm-3">
+                  <div className="col-item">
+                    <div className="photo">
+                      <Link to={`/books/${book.id}/review`}><img src={book.photoUrl} className="img-responsive" alt="a"/></Link>
                       </div>
                       <div className="info">
                         <div className="row">
@@ -57,14 +56,14 @@ class Books extends React.Component {
                             }
                           </div>
                         </div>
+
                         <div className="separator clear-left">
                           <p className="btn-add">
                             <i className="fa fa-shopping-cart"/>
                             <a href='#' onClick={() => this.addToCart(book)} className="hidden-sm">Add to cart</a>
                           </p>
                           <p className="btn-details">
-                            <i className="fa fa-list"/><Link to={`/books/${book.id}`} className="hidden-sm">More
-
+                            <i className="fa fa-list"/><Link to={`/books/${book.id}/review`} className="hidden-sm">More
                             details</Link></p>
                         </div>
                         <div className="clearfix">
